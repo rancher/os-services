@@ -1,5 +1,5 @@
 console:
-  image: rancher/ubuntuconsole:v0.3.0-rc3
+  image: rancher/ubuntuconsole:v0.3.0
   privileged: true
   links:
   - cloud-init

@@ -1,0 +1,23 @@
+consul:
+  image: progrium/consul
+  privileged: true
+  command: -server -bootstrap -ui-dir /ui
+  links:
+  - network
+  labels:
+  - io.rancher.os.scope=system
+  volumes_from:
+  - all-volumes
+  ports:
+  - "8300:8300"
+  - "8301:8301"
+  - "8301:8301/udp"
+  - "8302:8302"
+  - "8302:8302/udp"
+  - "8400:8400"
+  - "8500:8500"
+  - "8600:53/udp"
+  restart: always
+  pid: host
+  ipc: host
+  net: host

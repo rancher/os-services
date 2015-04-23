@@ -1,0 +1,11 @@
+dash:
+  image: husseingalal/busydash
+  privileged: true
+  links:
+  - network
+  labels:
+  - io.rancher.os.scope=system
+  restart: always
+  pid: host
+  ipc: host
+  net: host

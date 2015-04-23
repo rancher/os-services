@@ -1,3 +1,4 @@
 services:
 - ubuntu-console
 - consul
+- linux-dash

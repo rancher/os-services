@@ -8,7 +8,6 @@ consul:
   - io.rancher.os.scope=system
   volumes_from:
   - all-volumes
-  restart: always
   pid: host
   ipc: host
   net: host

@@ -1,0 +1,4 @@
+rancherserver:
+  image: rancher/server:latest
+  ports:
+  - "8080:8080"

@@ -1,0 +1,13 @@
+console:
+  image: rancher/debianconsole:v0.3.1
+  privileged: true
+  links:
+  - cloud-init
+  labels:
+  - io.rancher.os.scope=system
+  volumes_from:
+  - all-volumes
+  restart: always
+  pid: host
+  ipc: host
+  net: host

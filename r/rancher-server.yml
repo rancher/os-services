@@ -1,0 +1,15 @@
+rancher-state:
+  image: rancher/server:latest
+  labels:
+  - io.rancher.os.createonly=true
+  - io.rancher.os.remove=false
+  volumes:
+  - /var/lib/cattle
+  - /var/lib/mysql
+rancherserver:
+  image: rancher/server:latest
+  restart: always
+  labels:
+  - io.rancher.os.remove=false
+  ports:
+  - 8080:8080

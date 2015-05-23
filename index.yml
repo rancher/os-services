@@ -1,2 +1,3 @@
 services:
+- debian-console
 - ubuntu-console

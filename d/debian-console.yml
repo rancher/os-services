@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-debianconsole:v0.3.2
+  image: rancher/os-debianconsole:v0.3.3-rc1
   privileged: true
   links:
   - cloud-init

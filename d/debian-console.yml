@@ -1,10 +1,9 @@
 console:
   image: rancher/os-debianconsole:v0.4.0-dev
   privileged: true
-  links:
-  - cloud-init
   labels:
-  - io.rancher.os.scope=system
+    io.rancher.os.scope: system
+    io.rancher.os.after: cloud-init
   volumes_from:
   - all-volumes
   restart: always

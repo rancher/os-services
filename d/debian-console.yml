@@ -4,7 +4,6 @@ console:
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: cloud-init
-    io.docker.compose.rebuild: false
   volumes_from:
   - all-volumes
   restart: always

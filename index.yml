@@ -1,3 +1,5 @@
 services:
 - debian-console
 - ubuntu-console
+- kernel-headers
+- kerbel-headers-system-docker

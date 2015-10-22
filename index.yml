@@ -1,6 +1,5 @@
 services:
 - amazon-ecs-agent
-- aws-ec2-resizefs
 - debian-console
 - ubuntu-console
 - kernel-headers

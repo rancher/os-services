@@ -1,5 +1,5 @@
 ecs-agent:
-  image: amazon/amazon-ecs-agent
+  image: amazon/amazon-ecs-agent:v1.5.0
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: docker

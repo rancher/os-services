@@ -1,0 +1,10 @@
+resizefs:
+  image: rancher/os-resizefs:v0.4.1-dev
+  command: /dev/xvda
+  privileged: true
+  labels:
+    io.rancher.os.detach: false
+    io.rancher.os.scope: system
+    io.rancher.os.before: console
+  volumes:
+  - /var/log:/var/log

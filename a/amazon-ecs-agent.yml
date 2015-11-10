@@ -16,4 +16,4 @@ ecs-agent:
   - ECS_LOGFILE=/log/ecs-agent.log
   - ECS_LOGLEVEL=info
   - ECS_DATADIR=/data
-  - ECS_CLUSTER
+  - ECS_*

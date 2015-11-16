@@ -1,5 +1,5 @@
 resizefs:
-  image: rancher/os-resizefs:v0.4.1-dev
+  image: rancher/os-resizefs:v0.4.1
   command: /dev/xvda
   privileged: true
   labels:

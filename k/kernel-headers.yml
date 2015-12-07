@@ -1,7 +1,7 @@
 kernel-headers:
   image: rancher/os-headers:v0.4.2-dev
   labels:
-    io.rancher.os.detach: "false"
+    io.rancher.os.detach: false
     io.rancher.os.after: network
   volumes:
   - /usr/src:/usr/src

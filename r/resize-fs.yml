@@ -4,7 +4,7 @@ resizefs:
   - RESIZE_DEV
   privileged: true
   labels:
-    io.rancher.os.detach: "false"
+    io.rancher.os.detach: false
     io.rancher.os.scope: system
     io.rancher.os.before: console
   volumes:

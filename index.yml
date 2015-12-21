@@ -3,5 +3,4 @@ services:
 - debian-console
 - kernel-headers
 - kernel-headers-system-docker
-- resize-fs
 - ubuntu-console

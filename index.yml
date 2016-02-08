@@ -5,3 +5,5 @@ services:
 - kernel-headers-system-docker
 - resize-fs
 - ubuntu-console
+- fedora-console
+- centos-console

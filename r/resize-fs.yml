@@ -1,5 +1,5 @@
 resizefs:
-  image: rancher/os-resizefs:v0.4.3-rc3
+  image: rancher/os-resizefs:v0.4.3-rc4
   environment:
   - RESIZE_DEV
   privileged: true

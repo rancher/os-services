@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-ubuntuconsole:v0.4.3-rc3
+  image: rancher/os-ubuntuconsole:v0.4.3-rc4
   privileged: true
   labels:
     io.rancher.os.scope: system

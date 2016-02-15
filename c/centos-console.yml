@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-centosconsole:v0.4.3-rc4
+  image: rancher/os-centosconsole:v0.4.3
   privileged: true
   labels:
     io.rancher.os.scope: system

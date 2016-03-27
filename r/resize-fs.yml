@@ -2,6 +2,7 @@ resizefs:
   image: rancher/os-resizefs:v0.4.4-rc1
   environment:
   - RESIZE_DEV
+  - FORCE
   privileged: true
   labels:
     io.rancher.os.detach: false

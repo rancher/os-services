@@ -1,5 +1,4 @@
 services:
-- amazon-ecs-agent
 - debian-console
 - kernel-headers
 - kernel-headers-system-docker

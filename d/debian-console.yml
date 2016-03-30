@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-debianconsole:v0.4.4-dev
+  image: rancher/os-debianconsole:v0.4.4-dev_arm
   privileged: true
   labels:
     io.rancher.os.scope: system

@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-fedoraconsole:v0.4.4-dev_arm64
+  image: rancher/os-fedoraconsole:v0.4.4-rc2_arm64
   privileged: true
   labels:
     io.rancher.os.scope: system

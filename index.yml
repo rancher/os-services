@@ -1,5 +1,4 @@
 services:
-- centos-console
 - debian-console
 - fedora-console
 - kernel-headers

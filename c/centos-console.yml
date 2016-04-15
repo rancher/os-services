@@ -3,7 +3,7 @@ console:
   privileged: true
   labels:
     io.rancher.os.scope: system
-    io.rancher.os.after: cloud-init
+    io.rancher.os.after: wait-for-network
     io.docker.compose.rebuild: false
   volumes_from:
   - all-volumes

@@ -5,7 +5,7 @@ ecs-agent:
     io.rancher.os.after: docker
   restart: always
   volumes:
-  - /var/run/docker.sock:/var/run/docker.sock
+  - /var/run/:/var/run/
   - /var/log/ecs/:/log
   - /var/lib/ecs/data:/data
   - /sys/fs/cgroup:/sys/fs/cgroup:ro

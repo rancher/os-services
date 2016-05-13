@@ -1,5 +1,5 @@
 kernel-headers:
-  image: rancher/os-headers:v0.4.5-rc2
+  image: rancher/os-headers:v0.4.5
   labels:
     io.rancher.os.detach: false
     io.rancher.os.after: network

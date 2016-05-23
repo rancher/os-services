@@ -1,0 +1,11 @@
+resizefs:
+  image: rancher/os-resizefs:v0.4.5
+  environment:
+  - RESIZE_DEV
+  privileged: true
+  labels:
+    io.rancher.os.detach: false
+    io.rancher.os.scope: system
+    io.rancher.os.before: console
+  volumes:
+  - /var/log:/var/log

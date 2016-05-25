@@ -1,0 +1,13 @@
+consul:
+  image: progrium/consul
+  privileged: true
+  command: -server -bootstrap -ui-dir /ui
+  links:
+  - network
+  labels:
+  - io.rancher.os.scope=system
+  volumes_from:
+  - all-volumes
+  pid: host
+  ipc: host
+  net: host

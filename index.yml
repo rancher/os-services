@@ -2,7 +2,6 @@ services:
 - amazon-ecs-agent
 - kernel-headers
 - kernel-headers-system-docker
-- resize-fs
 consoles:
 - centos
 - debian

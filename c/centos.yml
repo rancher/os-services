@@ -1,10 +1,9 @@
 console:
-  image: rancher/os-debianconsole:v0.5.0-rc2
+  image: rancher/os-centosconsole:v0.5.0-rc2
   privileged: true
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: network
-    io.docker.compose.rebuild: false
   volumes_from:
   - all-volumes
   restart: always

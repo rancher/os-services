@@ -1,9 +1,10 @@
 services:
 - amazon-ecs-agent
-- centos-console
-- debian-console
-- fedora-console
 - kernel-headers
 - kernel-headers-system-docker
 - resize-fs
-- ubuntu-console
+consoles:
+- centos
+- debian
+- fedora
+- ubuntu

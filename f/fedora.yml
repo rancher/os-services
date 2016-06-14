@@ -4,6 +4,8 @@ console:
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: network
+    io.docker.compose.rebuild: "false"
+    io.rancher.os.console: fedora
   volumes_from:
   - all-volumes
   restart: always

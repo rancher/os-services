@@ -2,6 +2,7 @@ services:
 - amazon-ecs-agent
 - kernel-headers
 - kernel-headers-system-docker
+- open-vm-tools
 consoles:
 - centos
 - debian

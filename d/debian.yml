@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-debianconsole:v0.5.0-2${SUFFIX}
+  image: rancher/os-debianconsole:v0.5.0-3${SUFFIX}
   privileged: true
   labels:
     io.rancher.os.scope: system

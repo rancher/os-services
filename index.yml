@@ -1,13 +1,16 @@
 services:
 - amazon-ecs-agent
+- kernel-extras
 - kernel-headers
 - kernel-headers-system-docker
 - open-vm-tools
+- xfce
 consoles:
 - centos
 - debian
 - fedora
 - ubuntu
+- xfce
 engines:
 - docker-1.10.3
 - docker-1.11.2

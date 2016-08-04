@@ -1,0 +1,18 @@
+docker:
+  image: rancher/os-docker:1.11.2${SUFFIX}
+  command: /usr/bin/user-docker
+  environment:
+  - HTTP_PROXY
+  - HTTPS_PROXY
+  - NO_PROXY
+  labels:
+    io.rancher.os.scope: system
+    io.rancher.os.after: console
+  net: host
+  pid: host
+  ipc: host
+  uts: host
+  privileged: true
+  restart: always
+  volumes_from:
+  - all-volumes

@@ -9,3 +9,6 @@ open-vm-tools:
   ipc: host
   net: host
   uts: host
+  volumes_from:
+  - command-volumes
+  - system-volumes

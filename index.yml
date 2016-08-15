@@ -8,3 +8,7 @@ consoles:
 - debian
 - fedora
 - ubuntu
+engines:
+- docker-1.10.3
+- docker-1.11.2
+- docker-1.12.0

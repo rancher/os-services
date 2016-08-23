@@ -8,3 +8,4 @@ kernel-headers:
   volumes:
   - /usr/src:/usr/src
   - /lib/modules:/lib/modules
+  - /usr/bin/ros:/usr/bin/ros

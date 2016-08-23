@@ -4,7 +4,6 @@ services:
 - kernel-headers
 - kernel-headers-system-docker
 - open-vm-tools
-- xfce
 consoles:
 - centos
 - debian

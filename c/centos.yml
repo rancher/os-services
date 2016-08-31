@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-centosconsole:v0.6.0-rc4${SUFFIX}
+  image: rancher/os-centosconsole:v0.6.0-rc7${SUFFIX}
   privileged: true
   labels:
     io.rancher.os.scope: system

@@ -1,5 +1,5 @@
 kernel-headers-system-docker:
-  image: rancher/os-headers:v0.6.0-rc9${SUFFIX}
+  image: rancher/os-headers:v0.6.0${SUFFIX}
   labels:
     io.rancher.os.detach: false
     io.rancher.os.after: network

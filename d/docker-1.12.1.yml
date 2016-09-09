@@ -16,3 +16,6 @@ docker:
   restart: always
   volumes_from:
   - all-volumes
+  volumes:
+  - /sys:/host/sys
+  - /var/lib/system-docker:/var/lib/system-docker:shared

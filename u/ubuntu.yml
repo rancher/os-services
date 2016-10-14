@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-ubuntuconsole:v0.7.0-rc5${SUFFIX}
+  image: rancher/os-ubuntuconsole:v0.7.0-rc6${SUFFIX}
   privileged: true
   labels:
     io.rancher.os.scope: system

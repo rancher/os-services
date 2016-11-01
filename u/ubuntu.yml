@@ -1,5 +1,6 @@
 console:
   image: rancher/os-ubuntuconsole:v0.7.0${SUFFIX}
+  command: ros console-init
   privileged: true
   labels:
     io.rancher.os.scope: system

@@ -1,6 +1,6 @@
 docker:
   image: rancher/os-docker:1.12.1${SUFFIX}
-  command: /usr/bin/user-docker
+  command: ros user-docker
   environment:
   - HTTP_PROXY
   - HTTPS_PROXY

@@ -5,6 +5,7 @@ services:
 - kernel-headers-system-docker
 - open-vm-tools
 consoles:
+- alpine
 - centos
 - debian
 - fedora

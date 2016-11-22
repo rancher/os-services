@@ -1,0 +1,11 @@
+kernel-headers:
+  image: rancher/os-headers:4.9-rc6-rancher${SUFFIX}
+  labels:
+    io.rancher.os.detach: false
+    io.rancher.os.after: network
+  environment:
+  - KERNEL_HEADERS_URL
+  volumes:
+  - /usr/src:/usr/src
+  - /lib/modules:/lib/modules
+  - /usr/bin/ros:/usr/bin/ros

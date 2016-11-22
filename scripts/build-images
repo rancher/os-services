@@ -8,12 +8,20 @@ source $(dirname $0)/version
 cd $(dirname $0)/..
 
 mkdir -p dist
-touch dist/images
+echo > dist/images
 
 for i in $BASE/[1-9]*; do
     name="os-$(echo ${i} | cut -f2 -d-)"
-    tag="${OS_REPO}/${name}:${VERSION}${SUFFIX}"
-    echo Building ${tag}
+
+    version="${VERSION}"
+    if [ "${name}" == "os-docker" ]; then
+	    IFS='-' read -ra dirname <<< "$i"
+	    version=${dirname[2]}
+    fi
+
+    tag="${OS_REPO}/${name}:${version}${SUFFIX}"
+
+    echo Building ${tag} from ${i}
     if [ -e ${i}/prebuild.sh ]; then
         ${i}/prebuild.sh
     fi

@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 
-cd $(dirname $0)
+cd $(dirname $0)/..
 
-./build-images
+./scripts/build-images
+
 echo
 echo "Images ready to push:"
 cat dist/images

@@ -8,7 +8,7 @@ source $(dirname $0)/version
 cd $(dirname $0)/..
 
 mkdir -p dist
-> dist/images
+touch dist/images
 
 for i in $BASE/[1-9]*; do
     name="os-$(echo ${i} | cut -f2 -d-)"
@@ -20,10 +20,10 @@ for i in $BASE/[1-9]*; do
 
     if dapper -d --build -f ${i}/Dockerfile -- -t rancher/${name} ${i}; then
         docker tag rancher/${name} ${tag}
-        echo ${tag} >> dist/images
     elif [ "$?" != "42" ]; then
         exit 1
     else
         echo "Skipping ${tag}"
     fi
+    echo ${tag} >> dist/images
 done

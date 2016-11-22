@@ -11,7 +11,7 @@ $(TARGETS): .dapper
 	./.dapper $@
 
 shell-bind:
-	dapper -m bind -s
+	./.dapper -m bind -s
 
 clean:
 	@./scripts/clean

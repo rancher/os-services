@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-xfce:v0.7.0${SUFFIX}
+  image: rancher/os-xfce:v0.8.0-rc1${SUFFIX}
   privileged: true
   labels:
     io.rancher.os.scope: system

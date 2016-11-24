@@ -1,5 +1,5 @@
-kernel-extras-4.8.10-rancher:
-  image: rancher/os-extras:4.8.10-rancher${SUFFIX}
+kernel-extras4.9-rc6-rancher2:
+  image: rancher/os-extras:4.9-rc6-rancher2${SUFFIX}
   labels:
     io.rancher.os.detach: false
     io.rancher.os.after: network

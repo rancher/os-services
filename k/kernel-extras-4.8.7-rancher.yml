@@ -1,4 +1,4 @@
-kernel-extras:
+kernel-extras4.8.7-rancher:
   image: rancher/os-extras:4.8.7-rancher${SUFFIX}
   labels:
     io.rancher.os.detach: false

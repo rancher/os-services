@@ -1,4 +1,4 @@
-kernel-headers:
+kernel-headers-4.8.10-rancher:
   image: rancher/os-headers:4.8.10-rancher${SUFFIX}
   labels:
     io.rancher.os.detach: false

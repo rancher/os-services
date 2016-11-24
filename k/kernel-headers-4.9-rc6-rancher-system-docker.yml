@@ -1,4 +1,4 @@
-kernel-headers-system-docker:
+kernel-headers-4.9-rc6-rancher-system-docker:
   image: rancher/os-headers:4.9-rc6-rancher${SUFFIX}
   labels:
     io.rancher.os.detach: false

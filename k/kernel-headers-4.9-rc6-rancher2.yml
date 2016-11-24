@@ -1,9 +1,8 @@
-kernel-headers-4.8.10-rancher-system-docker:
-  image: rancher/os-headers:4.8.10-rancher${SUFFIX}
+kernel-headers-4.9-rc6-rancher2$:
+  image: rancher/os-headers:4.9-rc6-rancher2${SUFFIX}
   labels:
     io.rancher.os.detach: false
     io.rancher.os.after: network
-    io.rancher.os.scope: system
   environment:
   - KERNEL_HEADERS_URL
   volumes:

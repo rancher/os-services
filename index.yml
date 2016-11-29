@@ -3,12 +3,6 @@ services:
 - kernel-extras
 - kernel-headers
 - kernel-headers-system-docker
-- kernel-extras-4.8.10-rancher
-- kernel-headers-4.8.10-rancher
-- kernel-headers-4.8.10-rancher-system-docker
-- kernel-extras-4.9-rc-rancher2
-- kernel-headers-4.9-rc-rancher2
-- kernel-headers-4.9-rc-rancher2-system-docker
 - open-vm-tools
 consoles:
 - alpine

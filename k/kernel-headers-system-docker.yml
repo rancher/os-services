@@ -4,8 +4,6 @@ kernel-headers-system-docker:
     io.rancher.os.detach: false
     io.rancher.os.after: network
     io.rancher.os.scope: system
-  environment:
-  - KERNEL_HEADERS_URL
   volumes:
   - /usr/src:/usr/src
   - /lib/modules:/lib/modules

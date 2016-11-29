@@ -3,9 +3,6 @@ kernel-extras:
   labels:
     io.rancher.os.detach: false
     io.rancher.os.after: network
-  net: host
-  environment:
-  - KERNEL_EXTRAS_URL
   volumes:
   - /usr/src:/usr/src
   - /lib/modules:/lib/modules

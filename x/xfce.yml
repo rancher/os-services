@@ -1,5 +1,6 @@
 console:
   image: rancher/os-xfce:v0.8.0-rc1${SUFFIX}
+  entrypoint: /usr/bin/ros entrypoint
   privileged: true
   labels:
     io.rancher.os.scope: system

@@ -14,4 +14,3 @@ RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8 \
     && echo '## allow password less for docker user' >> /etc/sudoers \
     && echo 'docker ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 COPY prompt.sh /etc/profile.d/
-ENTRYPOINT ["/usr/bin/ros", "entrypoint"]

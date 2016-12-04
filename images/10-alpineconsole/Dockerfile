@@ -18,4 +18,3 @@ RUN addgroup -g 1100 rancher && \
     echo '## allow password less for docker user' >> /etc/sudoers && \
     echo 'docker ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     echo 'ssh-keygen -A' >> /usr/sbin/update-ssh-keys
-ENTRYPOINT ["/usr/bin/ros", "entrypoint"]

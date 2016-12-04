@@ -1,5 +1,6 @@
 console:
   image: rancher/os-debianconsole:v0.8.0-rc1${SUFFIX}
+  entrypoint: /usr/bin/ros entrypoint
   command: ros console-init
   privileged: true
   labels:

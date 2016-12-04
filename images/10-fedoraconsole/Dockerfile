@@ -1,8 +1,7 @@
 FROM rancher/os-fedoraconsole-base
 # FROM amd64=fedora:24 arm64=skip arm=skip
 RUN dnf install -y iptables openssh-server rsync sudo vim less ca-certificates psmisc htop procps-ng \
-    && rm -rf /etc/ssh/*key* \
-    && ln -s /sbin/agetty /sbin/getty
+    && rm -rf /etc/ssh/*key*
 RUN groupadd --gid 1100 rancher \
     && groupadd --gid 1101 docker \
     && useradd -u 1100 -g rancher -G docker,wheel -m -s /bin/bash rancher \

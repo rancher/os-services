@@ -3,7 +3,6 @@ FROM rancher/os-alpineconsole-base
 RUN apk --no-cache add bash openssh iptables rsync sudo vim less curl ca-certificates htop kmod iproute2 util-linux
 # missing packages at 2016-Nov: locales psmisc
 RUN rm -rf /etc/ssh/*key*
-#RUN ln -s /sbin/getty /sbin/agetty
 #RUN locale-gen en_US.UTF-8
 RUN addgroup -g 1100 rancher && \
     addgroup -g 1101 docker && \

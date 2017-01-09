@@ -74,9 +74,17 @@ RUN curl -sfL https://github.com/rancher/docker/releases/download/v1.11.2-ros1/d
     mv /assets/docker /assets/docker-1.11.2_arm64
 RUN curl -sfL https://get.docker.com/builds/Linux/x86_64/docker-1.12.1.tgz | tar xzf - -C /assets && \
     mv /assets/docker /assets/docker-1.12.1
+
 RUN curl -sfL https://get.docker.com/builds/Linux/x86_64/docker-1.12.3.tgz | tar xzf - -C /assets && \
     mv /assets/docker /assets/docker-1.12.3
 RUN curl -sfL https://github.com/rancher/docker/releases/download/v1.12.3/docker-v1.12.3_arm.tgz | tar xzf - -C /assets && \
     mv /assets/docker /assets/docker-1.12.3_arm
 RUN curl -sfL https://github.com/rancher/docker/releases/download/v1.12.3/docker-v1.12.3_arm64.tgz | tar xzf - -C /assets && \
     mv /assets/docker /assets/docker-1.12.3_arm64
+
+RUN curl -sfL https://get.docker.com/builds/Linux/x86_64/docker-1.12.5.tgz | tar xzf - -C /assets && \
+    mv /assets/docker /assets/docker-1.12.5
+RUN curl -sfL https://github.com/rancher/docker-package/releases/download/docker-v1.12.5/docker-v1.12.5_arm.tgz | tar xzf - -C /assets && \
+    mv /assets/docker /assets/docker-1.12.5_arm
+RUN curl -sfL https://github.com/rancher/docker-package/releases/download/docker-v1.12.5/docker-v1.12.5_arm64.tgz | tar xzf - -C /assets && \
+    mv /assets/docker /assets/docker-1.12.5_arm64

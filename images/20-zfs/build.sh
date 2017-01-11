@@ -12,6 +12,9 @@ if [ -e $STAMP ]; then
     exit 0
 fi
 
+#TODO: test that the headers are there
+#TODO: or, if we continue to be able to use the docker daemon, can we use ros to enable and up it?
+
 
 # get the zfs source as per https://github.com/zfsonlinux/zfs/wiki/Building-ZFS
 #ENV VERSION 0.6.5.8
@@ -68,6 +71,22 @@ make install
 cd /dist/zfs
 make install
 
+depmod
+
+cp /dist/Dockerfile.zfs-tools /dist/arch/Dockerfile
+system-docker build -t zfs-tools arch/
+
+# how do I export the bins to the console?
+# in the future, it'd be nice to have some share /usr/local/bin, but that might interfere with other things.
+# we do seem to have /opt mapped
+# cp /dist/wonka.sh /usr/local/bin/zpool
+
+for i in $(ls arch/bin); do 
+	system-docker cp wonka.sh console:/usr/bin/$i
+done
+for i in $(ls arch/sbin); do 
+	system-docker cp wonka.sh console:/usr/sbin/$i
+done
 
 touch $STAMP
 echo ZFS for ${KERNEL_VERSION} installed. Delete $STAMP to reinstall

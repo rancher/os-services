@@ -4,6 +4,7 @@ services:
 - kernel-headers
 - kernel-headers-system-docker
 - open-vm-tools
+- zfs
 consoles:
 - alpine
 - centos

@@ -58,6 +58,24 @@ else
    git clone https://github.com/zfsonlinux/zfs
 fi
 
+if [ "$KERNEL_VERSION" = "4.9.2-rancher" ]; then
+    echo "Detected $KERNEL_VERSION, using zfs master for now"
+    cd spl
+    git checkout master
+    cd ..
+    cd zfs
+    git checkout master
+    cd ..
+else
+    cd spl
+    git checkout spl-0.6.5-release
+    cd ..
+    cd zfs
+    git checkout zfs-0.6.5-release
+    cd ..
+fi
+
+
 # get headers for the kernel we're building for
 #ENV LINUX 4.9.2-rancher
 #RUN curl -sL https://github.com/rancher/os-kernel/releases/download/v${LINUX}/build-linux-${LINUX}-x86.tar.gz > build-linux-${LINUX}-x86.tar.gz

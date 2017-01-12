@@ -5,7 +5,7 @@ zfs:
   labels:
     io.rancher.os.scope: system
 #    io.rancher.os.detach: false
-    io.rancher.os.after: network
+    io.rancher.os.after: console
   volumes:
   - /usr/src:/usr/src
 #  - /lib/modules:/lib/modules

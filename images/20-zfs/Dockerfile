@@ -15,3 +15,4 @@ COPY Dockerfile.zfs-tools /dist/
 
 CMD ["/dist/build.sh"]
 
+ENTRYPOINT ["/usr/bin/ros", "entrypoint"]

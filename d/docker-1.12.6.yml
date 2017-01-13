@@ -1,5 +1,5 @@
 docker:
-  image: rancher/os-docker:1.12.5${SUFFIX}
+  image: rancher/os-docker:1.12.6${SUFFIX}
   command: /usr/bin/user-docker
   environment:
   - HTTP_PROXY

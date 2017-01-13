@@ -1,0 +1,9 @@
+FROM ubuntu:16.04
+# FROM arm64=aarch64/ubuntu:16.04 arm=armhf/ubuntu:16.04
+
+ADD bin/* /usr/local/bin/
+ADD sbin/* /usr/local/sbin/
+ADD lib/* /usr/local/lib/
+ADD libexec/* /usr/local/libexec/
+
+RUN ldconfig

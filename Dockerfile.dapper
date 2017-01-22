@@ -80,3 +80,7 @@ RUN curl -sfL https://github.com/rancher/docker-package/releases/download/docker
     mv /assets/docker /assets/docker-${DVERSION}_arm
 RUN curl -sfL https://github.com/rancher/docker-package/releases/download/docker-v${DVERSION}/docker-v${DVERSION}_arm64.tgz | tar xzf - -C /assets && \
     mv /assets/docker /assets/docker-${DVERSION}_arm64
+
+RUN curl -sfL https://test.docker.com/builds/Linux/x86_64/docker-1.13.0.tgz | tar xzf - -C /assets && \
+    mv /assets/docker /assets/docker-1.13.0 \
+    && rm -rf /assets/docker-1.13.0/completion

@@ -12,7 +12,6 @@ zfs:
 #  - /usr/bin/ros:/usr/bin/ros
   volumes_from:
   - all-volumes
-  restart: always
   pid: host
   ipc: host
   net: host

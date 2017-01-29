@@ -7,11 +7,14 @@ setupconsolecommands()
     # in the future, it'd be nice to have some share /usr/local/bin, but that might interfere with other things.
     # we do seem to have /opt mapped
 
-    for i in $(ls arch/bin); do
+    for i in $(ls arch/usr/local/bin); do
        system-docker cp wonka.sh console:/usr/bin/$i
     done
-    for i in $(ls arch/sbin); do
+    for i in $(ls arch/usr/local/sbin); do
        system-docker cp wonka.sh console:/usr/sbin/$i
+    done
+    for i in $(ls arch/sbin); do
+       system-docker cp wonka.sh console:/sbin/$i
     done
 }
 
@@ -89,27 +92,26 @@ fi
 cd /dist/spl
 sh ./autogen.sh
 ./configure \
-          --exec-prefix=/dist/arch \
           --with-linux=${DIR}
 make -s -j$(nproc)
 
 cd /dist/zfs
 sh ./autogen.sh
 ./configure \
-          --exec-prefix=/dist/arch \
           --with-linux=${DIR}
 make -s -j$(nproc)
 
 # last layer - we could use stratos :)
 cd /dist/spl
-make install
+make DESTDIR=/dist/arch install
 cd /dist/zfs
-make install
+make DESTDIR=/dist/arch install
 cd /dist
 
 depmod
 
 cp /dist/Dockerfile.zfs-tools /dist/arch/Dockerfile
+cp /dist/entry.sh /dist/arch/
 system-docker build -t zfs-tools arch/
 
 setupconsolecommands

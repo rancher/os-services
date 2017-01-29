@@ -9,6 +9,7 @@ RUN apt-get update \
 	parted lsscsi ksh curl git
 
 WORKDIR /dist
+COPY entry.sh /dist/
 COPY build.sh /dist/
 COPY wonka.sh /dist/
 COPY Dockerfile.zfs-tools /dist/

@@ -5,4 +5,6 @@ exec system-docker run --rm -it --privileged \
                 --net host \
                 --ipc host \
 		-v /mnt:/mnt:shared \
+		-v /dev:/host/dev \
+		-v /run:/run \
 		zfs-tools $(basename $0) $@

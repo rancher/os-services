@@ -125,7 +125,11 @@ for i in $(ls arch/sbin); do
 done
 system-docker build -t zfs-tools arch/
 
+modprobe zfs
+
 /dist/arch/setup_wonka.sh console
+/dist/arch/setup_wonka.sh zfs
+zpool import -a
 
 touch $STAMP
 echo ZFS for ${KERNEL_VERSION} installed. Delete $STAMP to reinstall

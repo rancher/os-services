@@ -7,6 +7,7 @@ ADD usr/local/sbin/* /usr/local/sbin/
 ADD usr/local/bin/* /usr/local/bin/
 ADD usr/local/lib/* /usr/local/lib/
 ADD usr/local/libexec/* /usr/local/libexec/
+ADD setup_wonka.sh /setup_wonka.sh
 
 RUN ldconfig
 

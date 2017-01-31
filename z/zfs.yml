@@ -5,6 +5,7 @@ zfs:
   labels:
     io.rancher.os.scope: system
 #    io.rancher.os.detach: false
+    io.rancher.os.before: docker
     io.rancher.os.after: console
   volumes:
   - /usr/src:/usr/src

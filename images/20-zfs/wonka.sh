@@ -1,6 +1,6 @@
 #!/bin/sh
 
-exec system-docker run --rm -it --privileged \
+exec system-docker run --rm --privileged \
                 --pid host \
                 --net host \
                 --ipc host \

@@ -108,6 +108,7 @@ cd /dist/zfs
 make DESTDIR=/dist/arch install
 cd /dist
 
+cp -r /dist/arch/lib/modules/${KERNEL_VERSION}/extra /lib/modules/${KERNEL_VERSION}/
 depmod
 
 cp /dist/Dockerfile.zfs-tools /dist/arch/Dockerfile

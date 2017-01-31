@@ -1,19 +1,6 @@
 #!/bin/sh
 set -ex
 
-setupconsolecommands()
-{
-    # how do I export the commands to the console?
-    # in the future, it'd be nice to have some share /usr/local/bin, but that might interfere with other things.
-    # we do seem to have /opt mapped
-
-    for i in $(ls arch/bin); do
-       system-docker cp wonka.sh console:/usr/bin/$i
-    done
-    for i in $(ls arch/sbin); do
-       system-docker cp wonka.sh console:/usr/sbin/$i
-    done
-}
 
 KERNEL_VERSION=$(uname -r)
 echo "zfs for ${KERNEL_VERSION}"
@@ -22,7 +9,17 @@ DIR=/lib/modules/${KERNEL_VERSION}/build
 STAMP=/lib/modules/${KERNEL_VERSION}/.zfs-done
 
 if [ -e $STAMP ]; then
-    setupconsolecommands
+    modprobe zfs
+
+    system-docker run --rm zfs-tools cat /setup_wonka.sh > /setup_wonka.sh
+    chmod 755 /setup_wonka.sh
+    # setup wonka in the console container
+    /setup_wonka.sh console
+    # setup wonka in this container so the import works
+    /setup_wonka.sh zfs
+
+    # re-init the zpool from disk
+    zpool import -a
     echo ZFS for ${KERNEL_VERSION} already installed. Delete $STAMP to reinstall
     exit 0
 fi
@@ -89,30 +86,46 @@ fi
 cd /dist/spl
 sh ./autogen.sh
 ./configure \
-          --exec-prefix=/dist/arch \
           --with-linux=${DIR}
 make -s -j$(nproc)
 
 cd /dist/zfs
 sh ./autogen.sh
 ./configure \
-          --exec-prefix=/dist/arch \
           --with-linux=${DIR}
 make -s -j$(nproc)
 
 # last layer - we could use stratos :)
 cd /dist/spl
-make install
+make DESTDIR=/dist/arch install
 cd /dist/zfs
-make install
+make DESTDIR=/dist/arch install
 cd /dist
 
+cp -r /dist/arch/lib/modules/${KERNEL_VERSION}/extra /lib/modules/${KERNEL_VERSION}/
 depmod
 
 cp /dist/Dockerfile.zfs-tools /dist/arch/Dockerfile
+cp /dist/entry.sh /dist/arch/
+
+# how do I export the commands to the console?
+# in the future, it'd be nice to have some share /usr/local/bin, but that might interfere with other things.
+# we do seem to have /opt mapped
+echo "#!/bin/sh" > /dist/arch/setup_wonka.sh
+echo "echo installing wonka bin links in \${1}" >> /dist/arch/setup_wonka.sh
+chmod 755 /dist/arch/setup_wonka.sh
+for i in $(ls arch/usr/local/bin); do
+   echo "system-docker cp wonka.sh \${1}:/usr/bin/$i" >> /dist/arch/setup_wonka.sh
+done
+for i in $(ls arch/usr/local/sbin); do
+   echo "system-docker cp wonka.sh \${1}:usr/sbin/$i" >> /dist/arch/setup_wonka.sh
+done
+for i in $(ls arch/sbin); do
+   echo "system-docker cp wonka.sh \${1}:/sbin/$i" >> /dist/arch/setup_wonka.sh
+done
 system-docker build -t zfs-tools arch/
 
-setupconsolecommands
+/dist/arch/setup_wonka.sh console
 
 touch $STAMP
 echo ZFS for ${KERNEL_VERSION} installed. Delete $STAMP to reinstall

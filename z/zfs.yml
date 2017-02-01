@@ -4,7 +4,7 @@ zfs:
   privileged: true
   labels:
     io.rancher.os.scope: system
-#    io.rancher.os.detach: false
+    io.rancher.os.detach: false
     io.rancher.os.before: docker
     io.rancher.os.after: console
   volumes:
@@ -17,5 +17,3 @@ zfs:
   ipc: host
   net: host
   uts: host
-# interestingly, zpool import -a seems to expect a tty
-  tty: true

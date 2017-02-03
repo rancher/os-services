@@ -11,7 +11,6 @@ consoles:
 - debian
 - fedora
 - ubuntu
-- xfce
 engines:
 - docker-1.10.3
 - docker-1.11.2

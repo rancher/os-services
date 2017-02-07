@@ -1,6 +1,7 @@
 open-vm-tools:
   image: rancher/os-openvmtools:v0.8.0-rc3
   command: /usr/bin/vmtoolsd
+  entrypoint: /usr/bin/ros entrypoint
   privileged: true
   labels:
     io.rancher.os.scope: system

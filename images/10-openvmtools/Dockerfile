@@ -3,3 +3,5 @@ FROM ubuntu:16.10
 RUN apt-get update \
     && apt-get install -y open-vm-tools \
     && rm -rf /var/lib/apt/*
+
+ENTRYPOINT ["/usr/bin/ros", "entrypoint"]

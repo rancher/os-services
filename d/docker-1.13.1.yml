@@ -1,5 +1,5 @@
 docker:
-  image: rancher/os-docker:1.13.0${SUFFIX}
+  image: rancher/os-docker:1.13.1${SUFFIX}
   command: ros user-docker
   environment:
   - HTTP_PROXY

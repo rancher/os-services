@@ -9,6 +9,9 @@ console:
     io.rancher.os.console: ubuntu
   volumes_from:
   - all-volumes
+  volumes:
+  - /media:/media:shared
+  - /mnt:/mnt:shared
   restart: always
   pid: host
   ipc: host

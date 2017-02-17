@@ -3,6 +3,7 @@ kernel-extras:
   labels:
     io.rancher.os.detach: false
     io.rancher.os.after: network
+    io.rancher.os.scope: system
   volumes:
   - /usr/src:/usr/src
   - /lib/modules:/lib/modules

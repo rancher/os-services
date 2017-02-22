@@ -1,7 +1,9 @@
 FROM rancher/os-debianconsole-base
 # FROM amd64=debian:jessie arm64=aarch64/debian:jessie arm=armhf/debian:jessie
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends iptables openssh-server rsync locales sudo vim less curl ca-certificates psmisc htop kmod iproute2 \
+    && apt-get install -y --no-install-recommends iptables openssh-server rsync locales \
+                           sudo vim less curl ca-certificates psmisc htop kmod iproute2 \
+                           net-tools \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /etc/ssh/*key*
 RUN locale-gen en_US.UTF-8 \

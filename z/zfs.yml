@@ -3,10 +3,10 @@ zfs:
   command: ./build.sh
   privileged: true
   labels:
-    io.rancher.os.scope: system
-    io.rancher.os.detach: false
-    io.rancher.os.before: docker
-    io.rancher.os.after: console
+    io.rancher.os.scope: "system"
+    io.rancher.os.detach: "false"
+    io.rancher.os.before: "docker"
+    io.rancher.os.after: "console"
   volumes:
   - /usr/src:/usr/src
 #  - /lib/modules:/lib/modules

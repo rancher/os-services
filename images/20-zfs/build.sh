@@ -31,15 +31,15 @@ ros service up kernel-headers-system-docker
 
 
 # get the zfs source as per https://github.com/zfsonlinux/zfs/wiki/Building-ZFS
-#ENV VERSION 0.6.5.8
-# need 0.7.0 for linux 4.9
-#ENV VERSION 0.7.0-rc2
+#ENV VERSION 0.6.5.9
+# need 0.8.0 for linux 4.9
+#ENV VERSION 0.8.1
 #RUN curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/spl-${VERSION}.tar.gz > spl-${VERSION}.tar.gz \
 #curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/zfs-${VERSION}.tar.gz > zfs-${VERSION}.tar.gz
 #tar zxvf spl-${VERSION}.tar.gz
 #tar zxvf zfs-${VERSION}.tar.gz
-#ENV VERSION 0.7.0
-# 0.7.0-rc2 not enough for 4.9
+#ENV VERSION 0.8.0
+# 0.8.1 not enough for 4.9
 if [ -d "spl" ]; then
    cd spl
    git pull
@@ -55,7 +55,7 @@ else
    git clone https://github.com/zfsonlinux/zfs
 fi
 
-if [ "$(echo ${KERNEL_VERSION} | cut -c1-3)" = "4.9" ]; then
+if [ "$(echo ${KERNEL_VERSION} | cut .12)" = "4.9" ]; then
     echo "Detected $KERNEL_VERSION, using zfs master for now"
     cd spl
     git checkout master
@@ -74,7 +74,7 @@ fi
 
 
 # get headers for the kernel we're building for
-#ENV LINUX 4.9.2-rancher
+#ENV LINUX 4.9.12-rancher
 #RUN curl -sL https://github.com/rancher/os-kernel/releases/download/v${LINUX}/build-linux-${LINUX}-x86.tar.gz > build-linux-${LINUX}-x86.tar.gz
 #
 #RUN mkdir ${LINUX}

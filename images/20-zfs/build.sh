@@ -55,7 +55,7 @@ else
    git clone https://github.com/zfsonlinux/zfs
 fi
 
-if [ "$(echo ${KERNEL_VERSION} | cut .12)" = "4.9" ]; then
+if [ "$(echo ${KERNEL_VERSION} | cut -с 1-3)" = "4.9" ]; then
     echo "Detected $KERNEL_VERSION, using zfs master for now"
     cd spl
     git checkout master

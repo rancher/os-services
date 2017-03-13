@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-ubuntuconsole:v0.8.0${SUFFIX}
+  image: rancher/os-ubuntuconsole:v0.9.0-rc1${SUFFIX}
   command: ros console-init
   privileged: true
   labels:

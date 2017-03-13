@@ -1,7 +1,7 @@
 zfs:
   image: rancher/os-zfs:latest
   command: ./build.sh
-  privileged: true
+  privileged: "true"
   labels:
     io.rancher.os.scope: "system"
     io.rancher.os.detach: "false"

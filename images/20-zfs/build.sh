@@ -31,47 +31,45 @@ ros service up kernel-headers-system-docker
 
 
 # get the zfs source as per https://github.com/zfsonlinux/zfs/wiki/Building-ZFS
-#ENV VERSION 0.6.5.8
-# need 0.7.0 for linux 4.9
-#ENV VERSION 0.7.0-rc2
-#RUN curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/spl-${VERSION}.tar.gz > spl-${VERSION}.tar.gz \
-#curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/zfs-${VERSION}.tar.gz > zfs-${VERSION}.tar.gz
-#tar zxvf spl-${VERSION}.tar.gz
-#tar zxvf zfs-${VERSION}.tar.gz
-#ENV VERSION 0.7.0
-# 0.7.0-rc2 not enough for 4.9
-if [ -d "spl" ]; then
-   cd spl
-   git pull
-   cd ..
-else
-   git clone https://github.com/zfsonlinux/spl
-fi
-if [ -d "zfs" ]; then
-   cd zfs
-   git pull
-   cd ..
-else
-   git clone https://github.com/zfsonlinux/zfs
-fi
+VERSION="0.6.5.9"
+curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/spl-${VERSION}.tar.gz > spl-${VERSION}.tar.gz
+curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/zfs-${VERSION}.tar.gz > zfs-${VERSION}.tar.gz
+tar zxvf spl-${VERSION}.tar.gz
+mv spl-${VERSION} spl
+tar zxvf zfs-${VERSION}.tar.gz
+mv zfs-${VERSION} zfs
 
-if [ "$(echo ${KERNEL_VERSION} | cut -c1-3)" = "4.9" ]; then
-    echo "Detected $KERNEL_VERSION, using zfs master for now"
-    cd spl
-    git checkout master
-    cd ..
-    cd zfs
-    git checkout master
-    cd ..
-else
-    cd spl
-    git checkout spl-0.6.5-release
-    cd ..
-    cd zfs
-    git checkout zfs-0.6.5-release
-    cd ..
-fi
-
+#if [ -d "spl" ]; then
+#   cd spl
+#   git pull
+#   cd ..
+#else
+#   git clone https://github.com/zfsonlinux/spl
+#fi
+#if [ -d "zfs" ]; then
+#   cd zfs
+#   git pull
+#   cd ..
+#else
+#   git clone https://github.com/zfsonlinux/zfs
+#fi
+#if [ "$(echo ${KERNEL_VERSION} | cut -c1-3)" = "4.9" ]; then
+#    echo "Detected $KERNEL_VERSION, using zfs master for now"
+#    cd spl
+#    git checkout master
+#    cd ..
+#    cd zfs
+#    git checkout master
+#    cd ..
+#else
+#    cd spl
+#    git checkout spl-0.6.5-release
+#    cd ..
+#    cd zfs
+#    git checkout zfs-0.6.5-release
+#    cd ..
+#fi
+#
 
 # get headers for the kernel we're building for
 #ENV LINUX 4.9.2-rancher

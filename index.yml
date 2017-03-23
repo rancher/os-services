@@ -1,5 +1,6 @@
 services:
 - amazon-ecs-agent
+- crontab
 - kernel-extras
 - kernel-headers
 - kernel-headers-system-docker

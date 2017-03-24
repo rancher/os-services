@@ -1,3 +1,4 @@
+# Docs: https://github.com/rancher/rancher-catalog/blob/master/infra-templates/container-crontab/0/README.md
 container-cron:
   image: rancher/container-crontab:v0.1.0
   privileged: true

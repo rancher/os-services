@@ -7,6 +7,10 @@ zfs:
     io.rancher.os.detach: "false"
     io.rancher.os.before: "docker"
     io.rancher.os.after: "console"
+  environment:
+  - HTTP_PROXY
+  - HTTPS_PROXY
+  - NO_PROXY
   volumes:
   - /usr/src:/usr/src
 #  - /lib/modules:/lib/modules

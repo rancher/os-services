@@ -35,9 +35,9 @@ VERSION="0.6.5.9"
 curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/spl-${VERSION}.tar.gz > spl-${VERSION}.tar.gz
 curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/zfs-${VERSION}.tar.gz > zfs-${VERSION}.tar.gz
 tar zxvf spl-${VERSION}.tar.gz
-mv spl-${VERSION} spl
+mv spl-${VERSION}/ spl/
 tar zxvf zfs-${VERSION}.tar.gz
-mv zfs-${VERSION} zfs
+mv zfs-${VERSION}/ zfs/
 
 #if [ -d "spl" ]; then
 #   cd spl

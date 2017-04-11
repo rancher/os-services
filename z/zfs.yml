@@ -1,5 +1,5 @@
 zfs:
-  image: rancher/os-zfs:v0.9.0
+  image: rancher/os-zfs:v0.9.2
   command: ./build.sh
   privileged: "true"
   labels:

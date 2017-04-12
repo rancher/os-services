@@ -1,3 +1,5 @@
+Based on code from https://github.com/efim-a-efim/rancheros-ec2-metadata
+
 # AWS EC2 Metadata provider for RancherOS
 
 Intended to use with Autoscaling.
@@ -55,3 +57,8 @@ rancher:
 * `-t [prefix]` - load EC2 instance tags starting with `prefix` and add them as labels to docker daemon options
 * `-l label:variablename` - add `variablename` variable to RancherOS environment that contains value of `label` tag. May be used multiple times
 * `-l label:config.path` - add value of `label` tag to `config.path` RancherOS config path. Works when `config.path` has `.` inside.
+
+### Configuration environment variables
+* `AWS_METADATA_LOAD` (`true`|`false`) - load metadata from AWS and add corresponding environment variables. See `-m` above.
+* `AWS_METADATA_TAG_PREFIXES` (list, separated by `;`) - see `-t` above
+* `AWS_METADATA_TAG_VARIABLES` (list, separated by `;`) - see `-l` for variables above

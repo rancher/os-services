@@ -6,6 +6,8 @@ services:
 - kernel-headers-system-docker
 - open-vm-tools
 - zfs
+- amazon-metadata
+- volume-netshare
 consoles:
 - alpine
 - centos

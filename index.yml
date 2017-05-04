@@ -5,6 +5,8 @@ services:
 - kernel-headers
 - kernel-headers-system-docker
 - open-vm-tools
+- rancher-server
+- rancher-server-stable
 - zfs
 consoles:
 - alpine

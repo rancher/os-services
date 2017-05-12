@@ -1,5 +1,5 @@
 amazon-metadata:
-  image: rancher/os-amazon-metadata:v0.9.2${SUFFIX}
+  image: rancher/os-amazonmetadata
   command: -m
   pid: host
   ipc: host

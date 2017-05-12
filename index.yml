@@ -8,6 +8,8 @@ services:
 - rancher-server
 - rancher-server-stable
 - zfs
+- amazon-metadata
+- volume-netshare
 consoles:
 - alpine
 - centos

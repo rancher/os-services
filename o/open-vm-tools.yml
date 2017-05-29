@@ -12,3 +12,4 @@ open-vm-tools:
   volumes_from:
   - command-volumes
   - system-volumes
+  - user-volumes

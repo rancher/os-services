@@ -1,15 +1,18 @@
 #!/bin/bash
-set -e
-
-#RUN curl -sfL https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar xzf - -C /assets && \
-#    mv /assets/docker /assets/docker-1.11.2
+set -ex
 
 VERSION=$1
 ARCH=$2
 if [ "$ARCH" == "amd64" ]; then
   ARCH="x86_64"
-  URL="https://get.docker.com/builds/Linux/${ARCH}/docker-${VERSION}.tgz"
-else
+  URL="https://get.docker.com/builds/Linux/${ARCH}/docker-${VERSION}-ce.tgz"
+fi
+if [ "$ARCH" == "arm" ]; then
+  DOCKERARCH="armel"
+  URL="https://get.docker.com/builds/Linux/${DOCKERARCH}/docker-${VERSION}-ce.tgz"
+  SUFFIX="_${ARCH}"
+fi
+if [ "$ARCH" == "arm64" ]; then
   URL="https://github.com/rancher/docker/releases/download/v${VERSION}-${ARCH}/docker-${VERSION}_${ARCH}.tgz"
   SUFFIX="_${ARCH}"
 fi

@@ -1,4 +1,5 @@
 FROM alpine:latest
+# FROM arm64=skip arm=skip
 
 ARG netshare_plugin_version=0.19
 

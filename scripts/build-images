@@ -34,10 +34,19 @@ for i in $BASE/[1-9]*; do
         fi
     else
         LOCALARCH="$ARCH"
-        SUFFIX=""
+        if [ "${LOCALARCH}" != "amd64" ]; then
+            SUFFIX="_${LOCALARCH}"
+	else
+	    SUFFIX=""
+	fi
     fi
 
     tag="${OS_REPO}/${name}:${version}${SUFFIX}"
+
+    if [[ "$LOCALARCH" != "$ARCH" ]]; then
+        echo "${tag} ($LOCALARCH) is not for this arch $ARCH, skipping"
+        continue
+    fi
 
     if docker_tag_exists "${OS_REPO}/${name}" "${version}${SUFFIX}"; then
         echo "${tag} EXISTS on Docker Hub, skipping"
@@ -46,6 +55,10 @@ for i in $BASE/[1-9]*; do
 
     if [ $(docker images -q ${tag}) ]; then
         echo "== ${tag} EXISTS locally, needs pushing"
+	if [ "${name}" == "os-docker" ]; then
+		docker run --rm -it ${tag} /engine/docker version | grep Version
+		docker run --rm -it ${tag} /engine/docker version | grep Arch
+	fi
     else
         echo Building ${tag} from ${i}
         if [ -e ${i}/prebuild.sh ]; then
@@ -53,7 +66,11 @@ for i in $BASE/[1-9]*; do
         fi
 
         if dapper -d --build -f ${i}/Dockerfile -- -t rancher/${name} ${i}; then
-            docker tag rancher/${name} ${tag}
+		docker tag rancher/${name} ${tag}
+		if [ "${name}" == "os-docker" ]; then
+			docker run --rm -it ${tag} /engine/docker version | grep Version
+			docker run --rm -it ${tag} /engine/docker version | grep Arch
+		fi
         elif [ "$?" != "42" ]; then
             exit 1
         else

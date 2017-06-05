@@ -19,4 +19,4 @@ DEST="./images/10-docker-${VERSION}${SUFFIX}"
 mkdir -p $DEST
 curl -sL ${URL} | tar xzf - -C $DEST
 mv $DEST/docker $DEST/engine
-rm -rf $DEST/completion
+mv $DEST/engine/completion $DEST

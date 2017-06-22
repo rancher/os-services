@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-centosconsole:v1.0.1${SUFFIX}
+  image: rancher/os-centosconsole:v1.0.2${SUFFIX}
   command: ros console-init
   privileged: true
   labels:

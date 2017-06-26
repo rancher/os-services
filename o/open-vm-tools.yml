@@ -1,5 +1,5 @@
 open-vm-tools:
-  image: rancher/os-openvmtools:v1.0.2
+  image: rancher/os-openvmtools:latest
   command: /usr/bin/vmtoolsd
   privileged: true
   labels:
@@ -12,3 +12,4 @@ open-vm-tools:
   volumes_from:
   - command-volumes
   - system-volumes
+  - user-volumes

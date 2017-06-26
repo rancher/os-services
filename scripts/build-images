@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+function docker_tag_exists() {
+    EXISTS=$(curl -s -i https://registry.hub.docker.com/v2/repositories/$1/tags/$2/ | grep last_updated)
+    return $?
+}
+
 export ARCH=${ARCH:-"amd64"}
 BASE=images
 
@@ -16,22 +21,62 @@ for i in $BASE/[1-9]*; do
     version="${VERSION}"
     if [ "${name}" == "os-docker" ]; then
 	    IFS='-' read -ra dirname <<< "$i"
-	    version=${dirname[2]}
+        IFS='_' read -ra ver <<< "${dirname[2]}"
+	    version=${ver[0]}
+
+        #TODO: eventually this will go away, and we can use ARCH
+        LOCALARCH="${ver[1]}"
+        if [ "${LOCALARCH}" != "" ]; then
+            SUFFIX="_${LOCALARCH}"
+        else
+            LOCALARCH="amd64"
+            SUFFIX=""
+        fi
+    else
+        LOCALARCH="$ARCH"
+        if [ "${LOCALARCH}" != "amd64" ]; then
+            SUFFIX="_${LOCALARCH}"
+	else
+	    SUFFIX=""
+	fi
     fi
 
     tag="${OS_REPO}/${name}:${version}${SUFFIX}"
 
-    echo Building ${tag} from ${i}
-    if [ -e ${i}/prebuild.sh ]; then
-        ${i}/prebuild.sh
+    if [[ "$LOCALARCH" != "$ARCH" ]]; then
+        echo "${tag} ($LOCALARCH) is not for this arch $ARCH, skipping"
+        continue
     fi
 
-    if dapper -d --build -f ${i}/Dockerfile -- -t rancher/${name} ${i}; then
-        docker tag rancher/${name} ${tag}
-    elif [ "$?" != "42" ]; then
-        exit 1
+    if docker_tag_exists "${OS_REPO}/${name}" "${version}${SUFFIX}"; then
+        echo "${tag} EXISTS on Docker Hub, skipping"
+        continue
+    fi
+
+    if [ $(docker images -q ${tag}) ]; then
+        echo "== ${tag} EXISTS locally, needs pushing"
+	if [ "${name}" == "os-docker" ]; then
+		docker run --rm -it ${tag} /engine/docker version | grep Version
+		docker run --rm -it ${tag} /engine/docker version | grep Arch
+	fi
     else
-        echo "Skipping ${tag}"
+        echo Building ${tag} from ${i}
+        if [ -e ${i}/prebuild.sh ]; then
+            ${i}/prebuild.sh "${version}" "${LOCALARCH}"
+        fi
+
+        if dapper -d --build -f ${i}/Dockerfile -- -t rancher/${name} ${i}; then
+		docker tag rancher/${name} ${tag}
+		if [ "${name}" == "os-docker" ]; then
+			docker run --rm -it ${tag} /engine/docker version | grep Version
+			docker run --rm -it ${tag} /engine/docker version | grep Arch
+		fi
+        elif [ "$?" != "42" ]; then
+            exit 1
+        else
+            echo "Skipping ${tag}"
+            continue
+        fi
     fi
     echo ${tag} >> dist/images
 done

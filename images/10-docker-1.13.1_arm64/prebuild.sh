@@ -10,7 +10,7 @@ if [ "$ARCH" == "amd64" ]; then
   ARCH="x86_64"
   URL="https://get.docker.com/builds/Linux/${ARCH}/docker-${VERSION}.tgz"
 else
-  URL="https://github.com/rancher/docker/releases/download/v${VERSION}-${ARCH}/docker-${VERSION}_${ARCH}.tgz"
+  URL="https://github.com/rancher/docker-package/releases/download/docker-v${VERSION}/docker-${VERSION}.tgz"
   SUFFIX="_${ARCH}"
 fi
 
@@ -19,4 +19,4 @@ DEST="./images/10-docker-${VERSION}${SUFFIX}"
 mkdir -p $DEST
 curl -sL ${URL} | tar xzf - -C $DEST
 mv $DEST/docker $DEST/engine
-rm -rf $DEST/completion
+mv $DEST/engine/completion $DEST

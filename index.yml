@@ -1,6 +1,7 @@
 services:
 - amazon-ecs-agent
 - crontab
+- open-iscsi
 - kernel-extras
 - kernel-headers
 - kernel-headers-system-docker
@@ -8,6 +9,8 @@ services:
 - rancher-server
 - rancher-server-stable
 - zfs
+- amazon-metadata
+- volume-netshare
 consoles:
 - alpine
 - centos

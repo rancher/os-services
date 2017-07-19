@@ -25,3 +25,4 @@ engines:
 - docker-17.03.1-ce
 - docker-17.04.0-ce
 - docker-17.05.0-ce
+- docker-17.06.0-ce

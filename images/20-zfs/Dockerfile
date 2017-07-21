@@ -1,5 +1,5 @@
-FROM ubuntu:16.04
-# FROM arm64=aarch64/ubuntu:16.04 arm=armhf/ubuntu:16.04
+FROM ubuntu:17.04
+# FROM arm64=arm64v8/ubuntu:17.04 arm=arm32v7/ubuntu:17.04
 
 
 RUN apt-get update \

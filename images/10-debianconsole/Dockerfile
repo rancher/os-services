@@ -1,5 +1,5 @@
 FROM rancher/os-debianconsole-base
-# FROM amd64=debian:jessie arm64=aarch64/debian:jessie arm=armhf/debian:jessie
+# FROM amd64=debian:stable arm64=arm64v8/debian:stable arm=arm32v7/debian:stable
 RUN apt-get update \
     && apt-get install -y --no-install-recommends iptables openssh-server rsync locales \
                            sudo vim less curl ca-certificates psmisc htop kmod iproute2 \

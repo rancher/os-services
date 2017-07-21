@@ -1,5 +1,5 @@
 FROM rancher/os-alpineconsole-base
-# FROM amd64=alpine:3.4 arm64=aarch64/alpine:edge arm=armhf/alpine:3.4
+# FROM amd64=alpine:3.6 arm64=arm64v8/alpine:3.6 arm=armhf/alpine:3.5
 RUN apk --no-cache add bash openssh iptables rsync sudo vim less curl ca-certificates htop kmod iproute2 util-linux
 # missing packages at 2016-Nov: locales psmisc
 RUN rm -rf /etc/ssh/*key*

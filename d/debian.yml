@@ -1,5 +1,5 @@
 console:
-  image: rancher/os-debianconsole:v1.1.0-rc2${SUFFIX}
+  image: rancher/os-debianconsole:v1.1.0-rc3${SUFFIX}
   command: ros console-init
   privileged: true
   labels:

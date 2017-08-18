@@ -18,8 +18,6 @@ consoles:
 - fedora
 - ubuntu
 engines:
-- docker-1.10.3
-- docker-1.11.2
 - docker-1.12.6
 - docker-1.13.1
 - docker-17.03.1-ce

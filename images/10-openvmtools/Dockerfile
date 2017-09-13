@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:testing-slim
 # FROM arm=skip arm64=skip
 
 # net-tools for ifconfig, iproute for ip

@@ -1,5 +1,5 @@
 open-vm-tools:
-  image: rancher/os-openvmtools:test
+  image: rancher/os-openvmtools:10.0.7.52125
   command: /usr/bin/vmtoolsd
   privileged: true
   labels:

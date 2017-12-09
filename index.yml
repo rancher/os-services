@@ -10,7 +10,9 @@ services:
 - rancher-server-stable
 - zfs
 - amazon-metadata
-- volume-netshare
+- volume-cifs
+- volume-efs
+- volume-nfs
 consoles:
 - alpine
 - centos

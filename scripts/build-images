@@ -6,23 +6,15 @@ function docker_tag_exists() {
     return $?
 }
 
-export ARCH=${ARCH:-"amd64"}
-BASE=images
-
-source $(dirname $0)/version
-cd $(dirname $0)/..
-
-mkdir -p dist
-echo > dist/images
-
-for i in $BASE/[1-9]*; do
-    name="os-$(echo ${i} | cut -f2 -d-)"
+function build() {
+    build_dir="${i}"
+    name="os-$(echo ${build_dir} | cut -f2 -d-)"
 
     version="${VERSION}"
     if [ "${name}" == "os-docker" ]; then
-	    IFS='-' read -ra dirname <<< "$i"
+        IFS='-' read -ra dirname <<< "$i"
         IFS='_' read -ra ver <<< "${dirname[2]}"
-	    version=${ver[0]}
+        version=${ver[0]}
 
         #TODO: eventually this will go away, and we can use ARCH
         LOCALARCH="${ver[1]}"
@@ -36,9 +28,9 @@ for i in $BASE/[1-9]*; do
         LOCALARCH="$ARCH"
         if [ "${LOCALARCH}" != "amd64" ]; then
             SUFFIX="_${LOCALARCH}"
-	else
-	    SUFFIX=""
-	fi
+        else
+            SUFFIX=""
+        fi
     fi
 
     tag="${OS_REPO}/${name}:${version}${SUFFIX}"
@@ -55,22 +47,22 @@ for i in $BASE/[1-9]*; do
 
     if [ $(docker images -q ${tag}) ]; then
         echo "== ${tag} EXISTS locally, needs pushing"
-	if [ "${name}" == "os-docker" ]; then
-		docker run --rm -it ${tag} /engine/docker version | grep Version
-		docker run --rm -it ${tag} /engine/docker version | grep Arch
-	fi
+        if [ "${name}" == "os-docker" ]; then
+            docker run --rm -it ${tag} /engine/docker version | grep Version
+            docker run --rm -it ${tag} /engine/docker version | grep Arch
+        fi
     else
-        echo Building ${tag} from ${i}
-        if [ -e ${i}/prebuild.sh ]; then
-            ${i}/prebuild.sh "${version}" "${LOCALARCH}"
+        echo Building ${tag} from ${build_dir}
+        if [ -e ${build_dir}/prebuild.sh ]; then
+            ${build_dir}/prebuild.sh "${version}" "${LOCALARCH}"
         fi
 
-        if dapper -d --build -f ${i}/Dockerfile -- -t rancher/${name} ${i}; then
-		docker tag rancher/${name} ${tag}
-		if [ "${name}" == "os-docker" ]; then
-			docker run --rm -it ${tag} /engine/docker version | grep Version
-			docker run --rm -it ${tag} /engine/docker version | grep Arch
-		fi
+        if dapper -d --build -f ${build_dir}/Dockerfile -- -t rancher/${name} ${build_dir}; then
+            docker tag rancher/${name} ${tag}
+            if [ "${name}" == "os-docker" ]; then
+                docker run --rm -it ${tag} /engine/docker version | grep Version
+                docker run --rm -it ${tag} /engine/docker version | grep Arch
+            fi
         elif [ "$?" != "42" ]; then
             exit 1
         else
@@ -79,4 +71,18 @@ for i in $BASE/[1-9]*; do
         fi
     fi
     echo ${tag} >> dist/images
+}
+
+export ARCH=${ARCH:-"amd64"}
+BASE=images
+
+source $(dirname $0)/version
+cd $(dirname $0)/..
+
+mkdir -p dist
+echo > dist/images
+
+image_dirname=${IMAGE_BUILD_NAME:-"[1-9]*"}
+for i in $BASE/$image_dirname; do
+    build ${i}
 done

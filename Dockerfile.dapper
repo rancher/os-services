@@ -25,6 +25,8 @@ ARG DOCKER_URL_amd64=https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_
 ARG DOCKER_URL_arm=https://github.com/rancher/docker/releases/download/${DOCKER_PATCH_VERSION}/docker-${DOCKER_VERSION}_arm
 ARG DOCKER_URL_arm64=https://github.com/rancher/docker/releases/download/${DOCKER_PATCH_VERSION}/docker-${DOCKER_VERSION}_arm64
 
+ARG IMAGE_BUILD_NAME=[1-9]*
+
 ######################################################
 
 # Set up environment
@@ -41,6 +43,9 @@ ENV DOCKER_URL_arm=${DOCKER_URL_arm}
 ENV DOCKER_VERSION=${DOCKER_VERSION}
 ENV HOST_ARCH=${HOST_ARCH}
 ENV OS_REPO=${OS_REPO}
+
+# Meaningful ENV
+ENV IMAGE_BUILD_NAME=${IMAGE_BUILD_NAME}
 
 RUN rm /bin/sh && \
     ln -s /bin/bash /bin/sh

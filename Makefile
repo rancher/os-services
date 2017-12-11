@@ -8,7 +8,8 @@ TARGETS := $(shell ls scripts | grep -vE 'clean|run|help')
 	@mv .dapper.tmp .dapper
 
 $(TARGETS): .dapper
-	./.dapper $@
+	mkdir -p dist
+	./.dapper $@ > $@.log 2>&1
 
 shell-bind:
 	./.dapper -m bind -s

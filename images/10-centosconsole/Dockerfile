@@ -1,6 +1,7 @@
 FROM rancher/os-centosconsole-base
-# FROM amd64=centos:7 arm64=skip arm=skip
+# FROM amd64=centos:7 arm64=arm64v8/centos:7
 RUN yum install -y iptables openssh-server rsync sudo vim less ca-certificates psmisc htop procps-ng iproute \
+    && yum clean all \
     && rm -rf /etc/ssh/*key*
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8 \
     && groupadd --gid 1100 rancher \

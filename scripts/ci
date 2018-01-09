@@ -9,3 +9,6 @@ echo
 echo "Images ready to push:"
 cat dist/images
 echo
+
+cat dist/images | sed 's/^/docker push /' > dist/publish.sh
+chmod 755 dist/publish.sh

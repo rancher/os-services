@@ -1,5 +1,5 @@
 volume-cifs:
-  command: cifs --verbose --basedir=/mnt ${VOLUME_CIFS_OPTIONS}
+  command: cifs --verbose --basedir=/mnt/volumes/netshare ${VOLUME_CIFS_OPTIONS}
   image: rancher/os-volumenetshare
   pid: host
   ipc: host
@@ -9,7 +9,7 @@ volume-cifs:
   restart: always
   volumes:
     - /run/docker/plugins:/run/docker/plugins:rw
-    - /mnt/volumes/netshare/cifs:/mnt:shared
+    - /mnt/volumes/netshare/cifs:/mnt/volumes/netshare/cifs:shared
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: docker

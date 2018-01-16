@@ -12,6 +12,7 @@ RUN addgroup -g 1100 rancher && \
     adduser -D -u 1101 -g docker -G sudo -s /bin/bash docker && \
     adduser docker docker && \
     sed -i 's/rancher:!/rancher:*/g' /etc/shadow && \
+    sed -i 's/docker:!/docker:*/g' /etc/shadow && \
     echo ClientAliveInterval 180 >> /etc/ssh/sshd_config && \
     echo '## allow password less for rancher user' >> /etc/sudoers && \
     echo 'rancher ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \

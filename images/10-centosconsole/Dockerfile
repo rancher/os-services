@@ -1,5 +1,5 @@
 FROM rancher/os-centosconsole-base
-# FROM amd64=centos:7 arm64=arm64v8/centos:7
+# FROM amd64=centos:7.4.1708 arm64=arm64v8/centos:7.4.1708
 RUN yum install -y iptables openssh-server rsync sudo vim less ca-certificates psmisc htop procps-ng iproute \
     && yum clean all \
     && rm -rf /etc/ssh/*key*

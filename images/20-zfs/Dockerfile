@@ -1,12 +1,13 @@
-FROM ubuntu:17.04
-# FROM arm64=arm64v8/ubuntu:17.04 arm=arm32v7/ubuntu:17.04
+FROM gcc:7.3.0
+# FROM arm64=arm64v8/gcc:7.3.0
 
 
 RUN apt-get update \
-    && apt-get install -yq build-essential autoconf libtool gawk alien fakeroot \
-	zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev libdevmapper-dev \
-	module-init-tools \
-	parted lsscsi ksh curl git
+    && apt-get install -yq --no-install-recommends \
+        zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev libssl-dev \
+        kmod \
+        parted lsscsi ksh curl git \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /dist
 COPY entry.sh /dist/

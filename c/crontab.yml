@@ -1,6 +1,6 @@
 # Docs: https://github.com/rancher/rancher-catalog/blob/master/infra-templates/container-crontab/0/README.md
 container-cron:
-  image: rancher/container-crontab:v0.1.0
+  image: rancher/container-crontab:v0.4.0
   privileged: true
   restart: always
   uts: host
@@ -9,3 +9,5 @@ container-cron:
     io.rancher.os.after: docker
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+  environment:
+    DOCKER_API_VERSION: "1.22"

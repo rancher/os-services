@@ -1,6 +1,6 @@
 volume-nfs:
   command: nfs --verbose --basedir=/mnt ${VOLUME_NFS_OPTIONS}
-  image: rancher/os-volumenetshare
+  image: ${REGISTRY_DOMAIN}/rancher/os-volumenetshare
   pid: host
   ipc: host
   net: host

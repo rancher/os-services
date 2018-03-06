@@ -1,5 +1,5 @@
 amazon-metadata:
-  image: rancher/os-amazonmetadata
+  image: ${REGISTRY_DOMAIN}/rancher/os-amazonmetadata
   command: -m
   pid: host
   ipc: host

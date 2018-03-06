@@ -1,5 +1,5 @@
 ecs-agent:
-  image: amazon/amazon-ecs-agent${ECS_AGENT_VERSION}
+  image: ${REGISTRY_DOMAIN}/amazon/amazon-ecs-agent${ECS_AGENT_VERSION}
   restart: always
   volumes:
   - /var/run/:/var/run/

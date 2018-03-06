@@ -1,5 +1,5 @@
 rancher-server:
-  image: rancher/server:stable
+  image: ${REGISTRY_DOMAIN}/rancher/server:stable
   privileged: false
   labels:
     io.rancher.os.scope: user

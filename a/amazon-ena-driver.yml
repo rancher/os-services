@@ -1,5 +1,5 @@
 amazon-ena-driver:
-  image: niusmallnan/os-amazonenadriver:v1.5.0
+  image: ${REGISTRY_DOMAIN}/niusmallnan/os-amazonenadriver:v1.5.0
   command: ./build.sh
   privileged: "true"
   labels:

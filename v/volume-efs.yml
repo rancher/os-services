@@ -1,5 +1,5 @@
 volume-efs:
-  command: efs --verbose --basedir=/mnt ${VOLUME_EFS_OPTIONS}
+  command: ["efs","--verbose","--basedir=/mnt","${VOLUME_EFS_OPTIONS}"]
   image: ${REGISTRY_DOMAIN}/rancher/os-volumenetshare
   pid: host
   ipc: host
@@ -8,12 +8,12 @@ volume-efs:
   privileged: true
   restart: always
   volumes:
-    - /run/docker/plugins:/run/docker/plugins:rw
-    - /mnt/volumes/netshare/efs:/mnt:shared
+  - /run/docker/plugins:/run/docker/plugins:rw
+  - /mnt/volumes/netshare/efs:/mnt:shared
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: docker
     io.rancher.os.detach: "true"
   environment:
-    - AWS_*
-    - VOLUME_EFS_OPTIONS
+  - AWS_*
+  - VOLUME_EFS_OPTIONS

@@ -1,6 +1,6 @@
 zfs:
   image: ${REGISTRY_DOMAIN}/rancher/os-zfs:v1.2.0${SUFFIX}
-  command: ./build.sh
+  command: ["./build.sh"]
   privileged: "true"
   labels:
     io.rancher.os.scope: "system"

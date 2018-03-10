@@ -1,6 +1,6 @@
 open-vm-tools:
   image: ${REGISTRY_DOMAIN}/rancher/os-openvmtools:10.1.10-2
-  command: /usr/bin/vmtoolsd
+  command: ["/usr/bin/vmtoolsd"]
   privileged: true
   labels:
     io.rancher.os.scope: system

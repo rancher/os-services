@@ -1,6 +1,6 @@
 docker:
   image: ${REGISTRY_DOMAIN}/rancher/os-docker:17.04.0${SUFFIX}
-  command: ros user-docker
+  command: ["ros","user-docker"]
   environment:
   - HTTP_PROXY
   - HTTPS_PROXY

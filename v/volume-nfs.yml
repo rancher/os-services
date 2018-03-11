@@ -1,5 +1,5 @@
 volume-nfs:
-  command: nfs --verbose --basedir=/mnt ${VOLUME_NFS_OPTIONS}
+  command: ["nfs","--verbose","--basedir=/mnt","${VOLUME_NFS_OPTIONS}"]
   image: ${REGISTRY_DOMAIN}/rancher/os-volumenetshare
   pid: host
   ipc: host
@@ -8,12 +8,12 @@ volume-nfs:
   privileged: true
   restart: always
   volumes:
-    - /run/docker/plugins:/run/docker/plugins:rw
-    - /mnt/volumes/netshare/nfs:/mnt:shared
+  - /run/docker/plugins:/run/docker/plugins:rw
+  - /mnt/volumes/netshare/nfs:/mnt:shared
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: docker
     io.rancher.os.detach: "true"
   environment:
-    - AWS_*
-    - VOLUME_NFS_OPTIONS
+  - AWS_*
+  - VOLUME_NFS_OPTIONS

@@ -1,6 +1,6 @@
 amazon-ena-driver:
   image: ${REGISTRY_DOMAIN}/niusmallnan/os-amazonenadriver:v1.5.0
-  command: ./build.sh
+  command: ["./build.sh"]
   privileged: "true"
   labels:
     io.rancher.os.scope: "system"

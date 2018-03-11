@@ -1,6 +1,6 @@
 amazon-metadata:
   image: ${REGISTRY_DOMAIN}/rancher/os-amazonmetadata
-  command: -m
+  command: ["-m"]
   pid: host
   ipc: host
   net: host
@@ -13,7 +13,7 @@ amazon-metadata:
     io.rancher.os.scope: system
     io.rancher.os.reloadconfig: "true"
   volumes:
-    - /usr/bin/ros:/bin/ros:ro
-    - /var/lib/rancher/conf:/var/lib/rancher/conf:rw
+  - /usr/bin/ros:/bin/ros:ro
+  - /var/lib/rancher/conf:/var/lib/rancher/conf:rw
   environment:
-    - AWS_*
+  - AWS_*

@@ -1,5 +1,5 @@
 console:
-  image: ${REGISTRY_DOMAIN}/rancher/os-alpineconsole:v1.2.0${SUFFIX}
+  image: ${REGISTRY_DOMAIN}/rancher/os-alpineconsole:v1.3.0${SUFFIX}
   command: ros console-init
   privileged: true
   labels:

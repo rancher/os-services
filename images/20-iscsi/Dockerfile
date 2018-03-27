@@ -1,12 +1,12 @@
-FROM ubuntu:17.04
-# FROM arm64=arm64v8/ubuntu:17.04 arm=arm32v7/ubuntu:17.04
+FROM gcc:7.3.0
+# FROM arm64=arm64v8/gcc:7.3.0
 
 RUN apt-get update \
-    && apt-get install -yq curl \
-	build-essential autoconf libtool \
-	module-init-tools \
-	libssl-dev \
-	libmount-dev
+    && apt-get install -yq --no-install-recommends \
+        libssl-dev libmount-dev \
+        kmod \
+        parted lsscsi ksh curl git \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /dist
 COPY entry.sh /dist/

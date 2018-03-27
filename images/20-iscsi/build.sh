@@ -27,13 +27,13 @@ ros service enable kernel-headers-system-docker
 ros service up kernel-headers-system-docker
 
 
-VERSION="0.97"
+VERSION="0.98"
 curl -sL https://github.com/open-iscsi/open-isns/archive/v${VERSION}.tar.gz > open-isns${VERSION}.tar.gz
 tar zxvf open-isns${VERSION}.tar.gz
 rm -rf /dist/isns
 mv open-isns-${VERSION}/ /dist/isns/
 
-VERSION="2.0.874"
+VERSION="2.0.875"
 curl -sL https://github.com/open-iscsi/open-iscsi/archive/${VERSION}.tar.gz > open-iscsi${VERSION}.tar.gz
 tar zxvf open-iscsi${VERSION}.tar.gz
 rm -rf /dist/iscsi

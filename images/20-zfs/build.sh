@@ -121,7 +121,7 @@ done
 for i in $(ls arch/sbin); do
    echo "system-docker cp wonka.sh \${1}:/sbin/$i" >> /dist/arch/setup_wonka.sh
 done
-system-docker build -t zfs-tools arch/
+system-docker build --network=host -t zfs-tools arch/
 
 modprobe zfs
 

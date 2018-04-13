@@ -1,5 +1,5 @@
 qemu-guest-agent:
-  image: ${REGISTRY_DOMAIN}/rancher/os-qemuguestagent:v1.4.0
+  image: ${REGISTRY_DOMAIN}/rancher/os-qemuguestagent:v1.4.0-rc1
   command: ["/usr/bin/qemu-ga"]
   privileged: true
   restart: always
@@ -10,6 +10,6 @@ qemu-guest-agent:
   net: host
   uts: host
   volumes_from:
-    - command-volumes
+  - command-volumes
   volumes:
-    - /dev:/host/dev
+  - /dev:/host/dev

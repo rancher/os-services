@@ -7,6 +7,7 @@ services:
 - kernel-headers
 - kernel-headers-system-docker
 - open-vm-tools
+- qemu-guest-agent
 - rancher-server
 - rancher-server-stable
 - zfs

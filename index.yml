@@ -15,6 +15,7 @@ services:
 - volume-cifs
 - volume-efs
 - volume-nfs
+- nvidia-driver
 consoles:
 - alpine
 - centos

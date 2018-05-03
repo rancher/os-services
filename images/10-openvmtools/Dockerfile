@@ -3,7 +3,7 @@ FROM debian:testing-slim
 
 # net-tools for ifconfig, iproute for ip
 RUN apt-get update \
-    && apt-get install -y open-vm-tools net-tools iproute sudo \
+    && apt-get install -y open-vm-tools net-tools iproute2 sudo fuse \
     && rm -rf /var/lib/apt/*
 
 ENTRYPOINT ["/usr/bin/ros", "entrypoint"]
@@ -15,4 +15,8 @@ RUN addgroup --gid 1100 rancher && \
     adduser docker sudo && \
     sed -i 's/rancher:!/rancher:*/g' /etc/shadow && \
     sed -i 's/docker:!/docker:*/g' /etc/shadow && \
+    echo '## allow password less for rancher user' >> /etc/sudoers && \
+    echo 'rancher ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
+    echo '## allow password less for docker user' >> /etc/sudoers && \
+    echo 'docker ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     echo "docker:tcuser" | chpasswd

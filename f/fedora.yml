@@ -1,5 +1,5 @@
 console:
-  image: ${REGISTRY_DOMAIN}/rancher/os-fedoraconsole:v1.3.0${SUFFIX}
+  image: ${REGISTRY_DOMAIN}/rancher/os-fedoraconsole:v1.4.0-rc1${SUFFIX}
   command: ros console-init
   privileged: true
   labels:

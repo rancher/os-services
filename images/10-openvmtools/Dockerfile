@@ -1,6 +1,7 @@
 FROM debian:stable-slim
 # FROM arm=skip arm64=skip
 
+# net-tools for ifconfig, iproute for ip
 RUN apt-get update && apt-get install -y \
 	net-tools \
 	iproute2 \

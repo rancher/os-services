@@ -1,10 +1,28 @@
-FROM debian:testing-slim
+FROM debian:stable-slim
 # FROM arm=skip arm64=skip
 
 # net-tools for ifconfig, iproute for ip
-RUN apt-get update \
-    && apt-get install -y open-vm-tools net-tools iproute2 sudo fuse \
+RUN apt-get update && apt-get install -y \
+	net-tools \
+	iproute2 \
+	sudo \
+	fuse \
+	libtirpc1 \
+	libdumbnet1 \
+	libfuse2 \
+	libffi6 \
+    && apt-get clean \
     && rm -rf /var/lib/apt/*
+
+COPY bin/ /usr/local/bin
+COPY lib/ /usr/local/lib
+
+RUN mkdir -p /mnt/hgfs \
+	&& ln -s /usr/local/bin/* /usr/bin/ \
+	&& ldconfig
+
+ENV LD_LIBRARY_PATH /lib:/usr/local/lib
+ENV LIBRARY_PATH /lib:/usr/local/lib
 
 ENTRYPOINT ["/usr/bin/ros", "entrypoint"]
 

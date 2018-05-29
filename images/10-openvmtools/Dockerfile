@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY bin/ /usr/local/bin
 COPY lib/ /usr/local/lib
+COPY etc/ /etc
 
 RUN mkdir -p /mnt/hgfs \
 	&& ln -s /usr/local/bin/* /usr/bin/ \

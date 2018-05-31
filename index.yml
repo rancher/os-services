@@ -10,7 +10,6 @@ services:
 - qemu-guest-agent
 - rancher-server
 - rancher-server-stable
-- zfs
 - amazon-metadata
 - volume-cifs
 - volume-efs

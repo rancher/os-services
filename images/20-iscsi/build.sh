@@ -33,7 +33,7 @@ tar zxvf open-isns${VERSION}.tar.gz
 rm -rf /dist/isns
 mv open-isns-${VERSION}/ /dist/isns/
 
-VERSION="2.0.875"
+VERSION="2.0.873"
 curl -sL https://github.com/open-iscsi/open-iscsi/archive/${VERSION}.tar.gz > open-iscsi${VERSION}.tar.gz
 tar zxvf open-iscsi${VERSION}.tar.gz
 rm -rf /dist/iscsi

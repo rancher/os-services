@@ -3,6 +3,7 @@ services:
 - amazon-ena-driver
 - crontab
 - open-iscsi
+- zfs
 - kernel-extras
 - kernel-headers
 - kernel-headers-system-docker

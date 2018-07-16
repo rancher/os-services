@@ -4,7 +4,7 @@ FROM gcc:7.3.0
 
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
-        zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev libssl-dev \
+        zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev libssl-dev libelf-dev \
         kmod \
         parted lsscsi ksh curl git \
     && rm -rf /var/lib/apt/lists/*

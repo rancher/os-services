@@ -14,8 +14,6 @@ if [ -e $STAMP ]; then
     chmod 755 /setup_wonka.sh
     # setup wonka in the console container
     /setup_wonka.sh console
-    # setup wonka in this container so the import works
-    /setup_wonka.sh iscsi-tools
 
     echo open-iscsi for ${KERNEL_VERSION} already installed. Delete $STAMP to reinstall
     exit 0

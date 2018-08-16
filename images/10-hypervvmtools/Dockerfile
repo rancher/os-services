@@ -1,44 +1,36 @@
-FROM ubuntu:16.04 as build-essential
+FROM gcc:7.3.0 as build-essential
 # FROM arm64=skip arm=skip
-RUN apt-get update  && \
-    apt-get install -y --no-install-recommends kmod bash git gcc make build-essential && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && \
+#    apt-get install -y --no-install-recommends kmod && \
+#    apt-get clean && \
+#    rm -rf /var/lib/apt/* \
 
-ARG OS_KERNEL_VERSION
-ENV KERNEL_VERSION=${OS_KERNEL_VERSION}
+WORKDIR /dist
+ENV KERNEL_VERSION 4.14.63-rancher
+ENV KERNEL_SRC https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-src.tgz
 
-COPY headers.sh  /
-COPY build.tar.gz /
-
-RUN /headers.sh && \
-    git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git && \
-    cd linux-stable/tools/hv && \
+RUN wget -q $KERNEL_SRC && \
+    tar xf linux-${KERNEL_VERSION}-src.tgz -C . && \
+    cd v${KERNEL_VERSION}/tools/hv && \
     make && \
-    apt-get remove -y --allow-remove-essential kmod bash git gcc make build-essential && \
-    rm -rf /build.tar.gz && \
-    cp hv_kvp_daemon /usr/bin && \
-    cp hv_vss_daemon /usr/bin && \
-    cp hv_fcopy_daemon /usr/bin && \
-    mkdir -p /usr/libexec/hypervkvpd/ && \
-    cp hv_get_dhcp_info.sh /usr/libexec/hypervkvpd/hv_get_dhcp_info && \
-    cp hv_get_dns_info.sh /usr/libexec/hypervkvpd/hv_get_dns_info && \
-    cp hv_set_ifconfig.sh /usr/libexec/hypervkvpd/hv_set_ifconfig && \
-    chmod +x /usr/libexec/hypervkvpd/* && \
-    cp lsvmbus /usr/bin && \
-    cd / && \
-    rm -rf linux-stable
+    mkdir -p /dist/scripts /dist/bin && \
+    cp hv*daemon /dist/bin/ && \
+    cp -a hv_get_dhcp_info.sh /dist/scripts/hv_get_dhcp_info && \
+    cp -a hv_get_dns_info.sh /dist/scripts/hv_get_dns_info && \
+    cp -a hv_set_ifconfig.sh /dist/scripts/hv_set_ifconfig && \
+    cp lsvmbus /dist/bin
 
-FROM ubuntu:16.04
+FROM debian:stable-slim
 # FROM arm64=skip arm=skip
 
-RUN apt-get update  && \
+RUN apt-get update && \
     apt-get install -y --no-install-recommends sudo && \
-    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/* && \
     mkdir -p /usr/libexec/hypervkvpd/
 
-COPY --from=build-essential /usr/bin/hv_* /usr/bin/
-COPY --from=build-essential /usr/bin/lsvmbus /usr/bin/
-COPY --from=build-essential /usr/libexec/hypervkvpd/* /usr/libexec/hypervkvpd/
+COPY --from=build-essential /dist/bin/* /usr/bin/
+COPY --from=build-essential /dist/scripts/* /usr/libexec/hypervkvpd/
 
 RUN chmod +x /usr/bin/hv_* && \
     chmod +x /usr/bin/lsvmbus

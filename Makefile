@@ -11,7 +11,7 @@ $(TARGETS): .dapper
 	mkdir -p dist
 	./.dapper $@ > $@.log 2>&1
 
-shell-bind:
+shell-bind: .dapper
 	./.dapper -m bind -s
 
 clean:

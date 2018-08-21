@@ -8,4 +8,4 @@ exec system-docker run --rm --privileged \
 		-v /media:/media:shared \
 		-v /dev:/host/dev \
 		-v /run:/run \
-		zfs-tools $(basename $0) $@
+		zfs-tools $(basename $0) "$@"

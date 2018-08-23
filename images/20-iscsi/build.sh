@@ -40,17 +40,19 @@ mv open-iscsi-${VERSION}/ /dist/iscsi/
 cd /dist/isns
 ./configure
 make -s -j$(nproc)
-make install
-make install_hdrs
-make install_lib
+#make install
+#make install_hdrs
+#make install_lib
 
 cd /dist/iscsi
 make -s -j$(nproc)
-make install
+#make install
 
 # last layer - we could use stratos :)
 cd /dist/isns
 make DESTDIR=/dist/arch install
+make DESTDIR=/dist/arch install_hdrs
+make DESTDIR=/dist/arch install_lib
 cd /dist/iscsi
 make DESTDIR=/dist/arch install
 cd /dist

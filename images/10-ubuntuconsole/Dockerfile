@@ -1,5 +1,5 @@
 FROM rancher/os-ubuntuconsole-base
-# FROM amd64=ubuntu:xenial arm64=arm64v8/ubuntu:xenial
+# FROM amd64=ubuntu:bionic arm64=arm64v8/ubuntu:bionic
 RUN apt-get update \
     && apt-get install -y --no-install-recommends iptables openssh-server rsync locales \
                            sudo vim less curl ca-certificates psmisc htop kmod iproute2 \

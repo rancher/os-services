@@ -1,6 +1,6 @@
 FROM rancher/os-centosconsole-base
 # FROM amd64=centos:7.5.1804 arm64=arm64v8/centos:7
-RUN yum install -y iptables openssh-server rsync sudo vim less ca-certificates psmisc htop procps-ng iproute \
+RUN yum install -y iptables openssh-server rsync sudo vim less ca-certificates psmisc htop procps-ng iproute openssh-clients \
     && yum clean all \
     && rm -rf /etc/ssh/*key*
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8 \

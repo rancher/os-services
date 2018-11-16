@@ -6,7 +6,7 @@ FROM gcc:7.3.0 as build-essential
 #    rm -rf /var/lib/apt/* \
 
 WORKDIR /dist
-ENV KERNEL_VERSION 4.14.63-rancher
+ENV KERNEL_VERSION 4.14.79-rancher2
 ENV KERNEL_SRC https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-src.tgz
 
 RUN wget -q $KERNEL_SRC && \

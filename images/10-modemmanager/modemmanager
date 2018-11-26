@@ -1,0 +1,128 @@
+#!/bin/bash
+set -e
+# ----------------------------------------------------------------------------------------------------------------------
+# pre-flight & exit hook
+# ----------------------------------------------------------------------------------------------------------------------
+system-docker restart udev-cold
+
+if [ -e .4g-interfaces ]; then
+    INTERFACES=`cat .4g-interfaces`
+    for i in $INTERFACES
+    do
+        EXIST_ADDR=`ip -f inet addr show $i | awk '/inet / {print $2}'`
+        if [[ -n $EXIST_ADDR ]]; then
+            ip addr del $EXIST_ADDR dev $i
+        fi
+    done
+    rm -rf .4g-interfaces
+fi
+
+_sigProcess() {
+    echo "SIGINT/SIGTERM signal..."
+    kill -9 $dbusPID
+    kill -9 $mmPID
+    wait
+    kill -9 $$
+}
+
+trap _sigProcess SIGINT SIGKILL SIGTERM
+
+if [ ! -d /var/run/dbus ]; then
+    mkdir -p /var/run/dbus
+fi
+
+if [ -e /var/run/dbus/pid ]; then
+    rm -rf /var/run/dbus/pid
+fi
+# ----------------------------------------------------------------------------------------------------------------------
+# mmcli main logic
+# 1. ros config export
+# 2. mmcli -L
+# 3. mmcli -m <interface_index> --simple-connect="<args>"
+# 4. dhcpcd -MA4 '<interface>'
+# ----------------------------------------------------------------------------------------------------------------------
+_mmcliProcess() {
+    sleep 5
+    found=false
+    n=0
+    until [ $n -ge 5 ]
+    do
+        modem=`mmcli -L | grep Modem || true`
+        if [ ! -z "$modem" ]; then
+            found=true
+            break
+        fi
+        n=$[$n+1]
+        sleep 25
+    done
+
+    if $found ; then
+        index=0
+        RANCHER_NETWORK=`ros config export | yq r - rancher.network -j`
+        MODEM_NUMBERS=`mmcli -L | grep Modem | sed -e 's/\//\ /g' | awk '{print $5}'`
+        echo "Found available modem number: $MODEM_NUMBERS ............................."
+        touch .4g-interfaces
+        for i in $MODEM_NUMBERS
+        do
+            CONFIG_SIZE=`jq -r ".modem_networks" <<< $RANCHER_NETWORK | jq length`
+            for ((j=0; j<$CONFIG_SIZE; j++))
+            do
+                INTERFACE_PATH=`mmcli -m $i status | grep device | awk -F"device: " '{print $2}' | sed "s/'/ /g" | sed '/^$/d' | sed 's/[ \t]*$//g'`
+                CONFIG_INTERFACE=`ls $INTERFACE_PATH/*/net`
+                VALID_INTERFACE=`mmcli -m $i status | grep -w $CONFIG_INTERFACE || true`
+                if [[ -z $VALID_INTERFACE ]]; then
+                    continue
+                fi
+                apn=`jq -r ".modem_networks.$CONFIG_INTERFACE.apn" <<< $RANCHER_NETWORK`
+                extras=`jq -r ".modem_networks.$CONFIG_INTERFACE.extra_args" <<< $RANCHER_NETWORK`
+                break
+            done
+
+            index=$[$index+1]
+            if [[ $apn == null ]]; then
+                echo "Failed to config modem $i: interface and apn match error ............................"
+                continue
+            fi
+            if [[ $extras == null ]]; then
+                # MODEM_SIMPLE_CONNECT=`mmcli -m ${i} --simple-connect="apn=$apn"`
+                MODEM_SIMPLE_CONNECT=`mmcli -m ${i} --simple-connect="apn=$apn"`
+            else
+                # MODEM_SIMPLE_CONNECT=`mmcli -m ${i} --simple-connect="apn=$apn,$extras"`
+                MODEM_SIMPLE_CONNECT=`mmcli -m ${MODEM_NUMBER} --simple-connect="apn=$apn,$extras"`
+            fi
+            if [ $? -eq 0 ]; then
+                echo "Modem $i connect result: $MODEM_SIMPLE_CONNECT ............................."
+                # MODEM_BEARER=`mmcli -m ${i} -b 0`
+                MODEM_INTERFACE=`mmcli -m ${i} -b 0 | grep interface | sed "s/'/ /g" | awk '{print $3}'`
+                EXIST_ADDR=`ip -f inet addr show $MODEM_INTERFACE | awk '/inet / {print $2}'`
+                if [[ -n $EXIST_ADDR ]]; then
+                    ip addr del $EXIST_ADDR dev $MODEM_INTERFACE
+                fi
+                dhcpcd -A4 --oneshot $MODEM_INTERFACE
+                echo "$MODEM_INTERFACE" >> .4g-interfaces
+            fi
+        done
+    fi
+}
+
+_mmcliProcess &
+# ----------------------------------------------------------------------------------------------------------------------
+# start up 2 daemon process
+# 1: dbus-daemon
+# 2: ModemManager
+# ----------------------------------------------------------------------------------------------------------------------
+dbus-daemon --system --nopidfile --nofork --print-pid &
+
+if [ $? == 1 ]; then
+    exit 1
+fi
+
+dbusPID=$!
+
+sleep 2
+
+ModemManager --debug &
+
+mmPID=$!
+
+wait

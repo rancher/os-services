@@ -6,11 +6,11 @@ FROM gcc:7.3.0 as build-essential
 #    rm -rf /var/lib/apt/* \
 
 WORKDIR /dist
-ENV KERNEL_VERSION 4.14.79-rancher2
-ENV KERNEL_SRC https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-src.tgz
+ENV KERNEL_VERSION 4.14.85-rancher
+ENV KERNEL_SRC https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-x86-src.tgz
 
 RUN wget -q $KERNEL_SRC && \
-    tar xf linux-${KERNEL_VERSION}-src.tgz -C . && \
+    tar xf linux-${KERNEL_VERSION}-x86-src.tgz -C . && \
     cd v${KERNEL_VERSION}/tools/hv && \
     make && \
     mkdir -p /dist/scripts /dist/bin && \

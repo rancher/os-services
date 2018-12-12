@@ -1,0 +1,20 @@
+modem-manager:
+  image: ${REGISTRY_DOMAIN}/rancher/os-modemmanager:v1.6.4-1
+  privileged: true
+  labels:
+    io.rancher.os.scope: system
+    io.rancher.os.after: udev
+  restart: always
+  pid: host
+  ipc: host
+  net: host
+  uts: host
+  volumes_from:
+  - command-volumes
+  volumes:
+  - /lib/modules:/lib/modules
+  - /lib/firmware:/lib/firmware
+  - /dev:/dev
+  - /sys:/sys
+  - /var/run:/var/run
+  - /var/lib/rancher:/var/lib/rancher

@@ -16,6 +16,7 @@ services:
 - volume-cifs
 - volume-efs
 - volume-nfs
+- modem-manager
 consoles:
 - alpine
 - centos

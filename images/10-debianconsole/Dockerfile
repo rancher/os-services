@@ -3,7 +3,7 @@ FROM rancher/os-debianconsole-base
 RUN apt-get update \
     && apt-get install -y --no-install-recommends iptables openssh-server rsync locales \
                            sudo vim less curl ca-certificates psmisc htop kmod iproute2 \
-                           net-tools \
+                           net-tools bash-completion \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /etc/ssh/*key*
 RUN locale-gen en_US.UTF-8 \

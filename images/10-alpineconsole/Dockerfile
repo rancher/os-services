@@ -1,6 +1,6 @@
 FROM rancher/os-alpineconsole-base
 # FROM amd64=alpine:3.8 arm64=arm64v8/alpine:3.8
-RUN apk --no-cache add bash openssh iptables rsync sudo vim less curl ca-certificates htop kmod iproute2 util-linux
+RUN apk --no-cache add bash openssh iptables rsync sudo vim less curl ca-certificates htop kmod iproute2 util-linux bash-completion
 # missing packages at 2016-Nov: locales psmisc
 RUN rm -rf /etc/ssh/*key*
 #RUN locale-gen en_US.UTF-8

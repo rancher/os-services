@@ -1,6 +1,6 @@
 qemu-guest-agent:
-  image: ${REGISTRY_DOMAIN}/rancher/os-qemuguestagent:v1.4.0-rc1
-  command: ["/usr/bin/qemu-ga"]
+  image: ${REGISTRY_DOMAIN}/rancher/os-qemuguestagent:v2.8.1-1
+  command: qemu-ga
   privileged: true
   restart: always
   labels:
@@ -11,5 +11,5 @@ qemu-guest-agent:
   uts: host
   volumes_from:
   - command-volumes
-  volumes:
-  - /dev:/host/dev
+  - system-volumes
+  - user-volumes

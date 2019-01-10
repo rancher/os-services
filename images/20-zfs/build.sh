@@ -121,7 +121,20 @@ done
 for i in $(ls arch/sbin); do
    echo "system-docker cp wonka.sh \${1}:/sbin/$i" >> /dist/arch/setup_wonka.sh
 done
-system-docker build --network=host -t zfs-tools arch/
+
+if [ "XX$HTTP_PROXY" != "XX" ]; then
+    BUILD_ARGS="--build-arg HTTP_PROXY --build-arg http_proxy="$HTTP_PROXY
+fi
+
+if [ "XX$HTTPS_PROXY" != "XX" ]; then
+    BUILD_ARGS=$BUILD_ARGS" --build-arg HTTPS_PROXY --build-arg https_proxy="$HTTPS_PROXY
+fi
+
+if [ "XX$NO_PROXY" != "XX" ]; then
+    BUILD_ARGS=$BUILD_ARGS" --build-arg NO_PROXY --build-arg no_proxy="$NO_PROXY
+fi
+
+system-docker build --network=host $BUILD_ARGS -t zfs-tools arch/
 
 modprobe zfs
 

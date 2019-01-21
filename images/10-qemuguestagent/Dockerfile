@@ -6,6 +6,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y qemu-guest-agent \
     && apt-get clean \
     && rm -rf /var/lib/apt/*
+ADD run /usr/local/bin/
 
 ENTRYPOINT ["/usr/bin/ros", "entrypoint"]
 

@@ -1,10 +1,11 @@
 qemu-guest-agent:
-  image: ${REGISTRY_DOMAIN}/rancher/os-qemuguestagent:v2.8.1-1
-  command: qemu-ga
+  image: ${REGISTRY_DOMAIN}/rancher/os-qemuguestagent:v2.8.1-2
+  command: /usr/local/bin/run
   privileged: true
   restart: always
   labels:
     io.rancher.os.scope: system
+    io.rancher.os.after: console
   pid: host
   ipc: host
   net: host

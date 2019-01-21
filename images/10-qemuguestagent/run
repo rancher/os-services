@@ -1,0 +1,14 @@
+#!/bin/bash
+for _ in {1..10}; do
+    if [[ -f /run/console-done ]]; then
+        docker_passwd=`system-docker exec console cat /etc/shadow | grep docker | awk -F ":" '{print $2}'`
+        if [[ $docker_passwd == "*" ]]; then
+            system-docker exec console sh -c 'echo "docker:tcuser" | chpasswd' > /dev/null 2>&1
+        fi
+        break
+    else
+        sleep 2
+    fi
+done
+
+qemu-ga

@@ -18,6 +18,7 @@ services:
 - volume-nfs
 - modem-manager
 - waagent
+- virtualbox-tools
 consoles:
 - alpine
 - centos

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+_sigProcess() {
+    echo "SIGINT/SIGTERM signal..."
+    kill -9 $vboxServicePID
+    wait
+    kill -9 $$
+}
+trap _sigProcess SIGINT SIGKILL SIGTERM
+
+kernel_dir=/lib/modules/`uname -r`
+if [ ! -d $kernel_dir/extra ];then
+    mkdir $kernel_dir/extra
+else
+    echo "Directory $kernel_dir/extra already exists."
+fi
+
+lsmod | grep "vboxsf" > /dev/null 2>&1
+if [ $? -ne 0 ];then
+    cp /dist/*.ko $kernel_dir/extra
+    depmod
+    modprobe vboxguest
+    modprobe vboxsf
+else
+    echo "Vbox modules have been loaded."
+fi
+
+for _ in {1..10}
+do
+    if [ -f /run/console-done ];then
+        system-docker exec console ls /sbin/mount.vboxsf  > /dev/null 2>&1
+        if [ $? -ne 0 ];then
+            system-docker cp /dist/mount.vboxsf console:/sbin/
+        else
+            echo "/sbin/mount.vboxsf already exists."
+        fi
+        break
+    else
+        echo "Waiting for the console to start ..."
+        sleep 2
+    fi
+done
+
+/sbin/VBoxService --disable-automount --foreground --disable-vminfo &
+vboxServicePID=$!
+
+wait

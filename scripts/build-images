@@ -11,26 +11,11 @@ function build() {
     name="os-$(echo ${build_dir} | cut -f2 -d-)"
 
     version="${VERSION}"
-    if [ "${name}" == "os-docker" ]; then
-        IFS='-' read -ra dirname <<< "$i"
-        IFS='_' read -ra ver <<< "${dirname[2]}"
-        version=${ver[0]}
-
-        #TODO: eventually this will go away, and we can use ARCH
-        LOCALARCH="${ver[1]}"
-        if [ "${LOCALARCH}" != "" ]; then
-            SUFFIX="_${LOCALARCH}"
-        else
-            LOCALARCH="amd64"
-            SUFFIX=""
-        fi
+    LOCALARCH="$ARCH"
+    if [ "${LOCALARCH}" != "amd64" ]; then
+        SUFFIX="_${LOCALARCH}"
     else
-        LOCALARCH="$ARCH"
-        if [ "${LOCALARCH}" != "amd64" ]; then
-            SUFFIX="_${LOCALARCH}"
-        else
-            SUFFIX=""
-        fi
+        SUFFIX=""
     fi
 
     tag="${OS_REPO}/${name}:${version}${SUFFIX}"
@@ -41,8 +26,7 @@ function build() {
     fi
 
     if docker_tag_exists "${OS_REPO}/${name}" "${version}${SUFFIX}"; then
-        echo "${tag} EXISTS on Docker Hub, skipping"
-        continue
+        echo "Warning: ${tag} EXISTS on Docker Hub"
     fi
 
     if [ $(docker images -q ${tag}) ]; then

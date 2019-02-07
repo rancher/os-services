@@ -6,12 +6,9 @@ set -e
 
 VERSION=$1
 ARCH=$2
-if [ "$ARCH" == "amd64" ]; then
-  ARCH="x86_64"
-  URL="https://get.docker.com/builds/Linux/${ARCH}/docker-${VERSION}.tgz"
-else
-  URL="https://github.com/rancher/docker/releases/download/v${VERSION}-${ARCH}/docker-${VERSION}_${ARCH}.tgz"
-  SUFFIX="_${ARCH}"
+if [ "$ARCH" == "arm64" ]; then
+    URL="https://github.com/rancher/docker/releases/download/v${VERSION}-${ARCH}/docker-${VERSION}_${ARCH}.tgz"
+    SUFFIX="_${ARCH}"
 fi
 
 DEST="./images/10-docker-${VERSION}${SUFFIX}"

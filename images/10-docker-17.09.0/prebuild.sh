@@ -4,8 +4,8 @@ set -ex
 VERSION=$1
 ARCH=$2
 if [ "$ARCH" == "amd64" ]; then
-  ARCH="x86_64"
-  URL="https://download.docker.com/linux/static/stable/${ARCH}/docker-${VERSION}-ce.tgz"
+    DOCKERARCH="x86_64"
+    URL="https://download.docker.com/linux/static/stable/${DOCKERARCH}/docker-${VERSION}-ce.tgz"
 fi
 
 DEST="./images/10-docker-${VERSION}${SUFFIX}"

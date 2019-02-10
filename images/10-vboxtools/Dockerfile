@@ -3,8 +3,8 @@ ENV KERNEL_VERSION 4.14.85-rancher
 
 ENV KERNEL_HEADERS https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/build-linux-${KERNEL_VERSION}-x86.tar.gz
 ENV KERNEL_BASE https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-x86.tar.gz
-ENV VBOX_VERSION 5.2.22
-ENV VBOX_SHA256 e51e33500a265b5c2d7bb2d03d32208df880523dfcb1e2dde2c78a0e0daa0603
+ENV VBOX_VERSION 5.2.26
+ENV VBOX_SHA256 b927c5d0d4c97a9da2522daad41fe96b616ed06bfb0c883f9c42aad2244f7c38
 
 RUN apt-get update; \
 	apt-get install -y --no-install-recommends p7zip-full libelf-dev; \
@@ -37,8 +37,10 @@ COPY run /usr/local/bin/
 COPY --from=build-essential /usr/src/vbox/amd64/src/vboxguest/vboxguest.ko .
 COPY --from=build-essential /usr/src/vbox/amd64/src/vboxguest/vboxsf.ko .
 COPY --from=build-essential /usr/src/vbox/amd64/other/mount.vboxsf .
-COPY --from=build-essential /usr/src/vbox/amd64/sbin/VBoxService .
-COPY --from=build-essential /usr/src/vbox/amd64/bin/VBoxControl .
+COPY --from=build-essential /usr/src/vbox/amd64/sbin/VBoxService /sbin/
+COPY --from=build-essential /usr/src/vbox/amd64/bin/VBoxControl /bin/
 RUN chmod +x /usr/local/bin/run
 
 CMD ["/usr/local/bin/run"]
+
+ENTRYPOINT ["/usr/bin/ros", "entrypoint"]

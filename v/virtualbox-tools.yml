@@ -1,7 +1,8 @@
 virtualbox-tools:
-  image: ${REGISTRY_DOMAIN}/rancher/os-vboxtools:v5.2.22-1
+  image: ${REGISTRY_DOMAIN}/rancher/os-vboxtools:v5.2.26-1
   command: /usr/local/bin/run
   privileged: true
+  restart: always
   labels:
     io.rancher.os.scope: system
     io.rancher.os.after: console

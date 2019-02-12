@@ -1,4 +1,5 @@
 #!/bin/bash
+# patch version 1, CVE-2019-5736
 set -ex
 
 #RUN curl -sfL https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar xzf - -C /assets && \
@@ -17,3 +18,5 @@ mkdir -p $DEST
 curl -sL ${URL} | tar xzf - -C $DEST
 mv $DEST/docker $DEST/engine
 mv $DEST/engine/completion $DEST
+
+curl -sL -o $DEST/engine/docker-runc https://github.com/rancher/runc-cve/releases/download/CVE-2019-5736-build2/runc-v${VERSION}-${ARCH}

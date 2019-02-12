@@ -1,4 +1,5 @@
 #!/bin/bash
+# patch version 1, CVE-2019-5736
 set -ex
 
 VERSION=$1
@@ -14,3 +15,5 @@ mkdir -p $DEST
 curl -sL ${URL} | tar xzf - -C $DEST
 mv $DEST/docker $DEST/engine
 mv $DEST/engine/completion $DEST || true
+
+curl -sL -o $DEST/engine/docker-runc https://github.com/rancher/runc-cve/releases/download/CVE-2019-5736-build2/runc-v${VERSION}-${ARCH}

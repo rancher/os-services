@@ -40,6 +40,7 @@ engines:
 - docker-18.03.1-ce
 - docker-18.06.0-ce
 - docker-18.06.1-ce
+- docker-18.06.2-ce
 - docker-18.09.0
 - docker-18.09.1
 - docker-18.09.2

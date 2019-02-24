@@ -1,4 +1,4 @@
-rancher-server:
+rancher-server-stable:
   image: ${REGISTRY_DOMAIN}/rancher/server:stable
   privileged: false
   labels:

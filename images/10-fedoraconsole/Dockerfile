@@ -6,7 +6,7 @@ COPY build/sshd_config.append.tpl /etc/ssh/
 
 RUN dnf install -y iptables openssh-server rsync sudo vim-minimal \
                     less ca-certificates psmisc htop procps-ng \
-                    iproute openssh-clients bash-completion \
+                    iproute openssh-clients bash-completion iputils wget \
     && dnf clean all \
     && rm -rf /etc/ssh/*key* \
     && groupadd --gid 1100 rancher \

@@ -6,7 +6,7 @@ COPY build/sshd_config.append.tpl /etc/ssh/
 RUN apt-get update \
     && apt-get install -y --no-install-recommends iptables openssh-server rsync locales \
                            sudo vim less curl ca-certificates psmisc htop kmod iproute2 \
-                           net-tools bash-completion \
+                           net-tools bash-completion wget \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /etc/ssh/*key* \
     && locale-gen en_US.UTF-8 \

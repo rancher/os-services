@@ -6,7 +6,7 @@ COPY build/sshd_config.append.tpl /etc/ssh/
 
 RUN yum install -y iptables openssh-server rsync sudo \
                     vim less ca-certificates psmisc htop \
-                    procps-ng iproute openssh-clients bash-completion \
+                    procps-ng iproute openssh-clients bash-completion wget \
     && yum clean all \
     && rm -rf /etc/ssh/*key* \
     && localedef -c -f UTF-8 -i en_US en_US.UTF-8 \

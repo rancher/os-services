@@ -1,0 +1,19 @@
+#!/bin/bash
+_sigProcess() {
+    echo "SIGINT/SIGTERM signal..."
+    /opt/cloud/agent-manager-client/control stop
+    /opt/cloud/agents/pamon-agent/control stop
+    cd /opt/cloud/agents/cloud-agent && ./control stop
+    kill -9 $SLEEPPID
+    wait
+    kill -9 $$
+}
+trap _sigProcess SIGINT SIGKILL SIGTERM
+
+/opt/cloud/agent-manager-client/control start
+# Starting agent-manager-client can't be started in the foreground
+# so use `sleep infinity` as the daemon.
+sleep infinity &
+SLEEPPID=$!
+
+wait

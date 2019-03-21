@@ -19,6 +19,7 @@ services:
 - modem-manager
 - waagent
 - virtualbox-tools
+- pingan-amc
 consoles:
 - alpine
 - centos

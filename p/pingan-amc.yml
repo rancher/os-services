@@ -1,5 +1,5 @@
 pingan-amc:
-  image: ${REGISTRY_DOMAIN}/rancher/os-pingan-amc:v0.0.6-1
+  image: ${REGISTRY_DOMAIN}/cnrancher/os-pingan-amc:v0.0.6-1
   privileged: true
   labels:
     io.rancher.os.scope: system

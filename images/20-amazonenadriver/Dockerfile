@@ -1,5 +1,5 @@
-FROM ubuntu:17.04
-# FROM arm64=arm64v8/ubuntu:17.04 arm=arm32v7/ubuntu:17.04
+FROM ubuntu:17.10
+# FROM arm64=arm64v8/ubuntu:17.10 arm=arm32v7/ubuntu:17.10
 
 ENV ENA_VERSION 1.5.0
 

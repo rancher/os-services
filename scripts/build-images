@@ -37,12 +37,12 @@ function build() {
 
     if [[ "$LOCALARCH" != "$ARCH" ]]; then
         echo "${tag} ($LOCALARCH) is not for this arch $ARCH, skipping"
-        continue
+        return
     fi
 
     if docker_tag_exists "${OS_REPO}/${name}" "${version}${SUFFIX}"; then
         echo "${tag} EXISTS on Docker Hub, skipping"
-        continue
+        return
     fi
 
     if [ $(docker images -q ${tag}) ]; then
@@ -67,7 +67,7 @@ function build() {
             exit 1
         else
             echo "Skipping ${tag}"
-            continue
+            return
         fi
     fi
     echo ${tag} >> dist/images

@@ -57,8 +57,8 @@ function build() {
             ${build_dir}/prebuild.sh "${version}" "${LOCALARCH}"
         fi
 
-        if dapper -d --build -f ${build_dir}/Dockerfile -- -t rancher/${name} ${build_dir}; then
-            docker tag rancher/${name} ${tag}
+        if dapper -d --build -f ${build_dir}/Dockerfile -- -t ${OS_REPO}/${name} ${build_dir}; then
+            docker tag ${OS_REPO}/${name} ${tag}
             if [ "${name}" == "os-docker" ]; then
                 docker run --rm -it ${tag} /engine/docker version | grep Version
                 docker run --rm -it ${tag} /engine/docker version | grep Arch

@@ -20,7 +20,6 @@ RUN apk --no-cache add bash openssh iptables rsync sudo \
     echo 'rancher ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     echo '## allow password less for docker user' >> /etc/sudoers && \
     echo 'docker ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
-    echo 'ssh-keygen -A' >> /usr/sbin/update-ssh-keys && \
     ln -s /bin/ps /usr/bin/ps && \
     cat /etc/ssh/sshd_config > /etc/ssh/sshd_config.tpl && \
     cat /etc/ssh/sshd_config.append.tpl >> /etc/ssh/sshd_config.tpl && \

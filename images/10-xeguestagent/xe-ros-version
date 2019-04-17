@@ -1,0 +1,17 @@
+#!/bin/sh
+
+distro="RancherOS"
+release=$(ros os version)
+uname=$(uname -r)
+name="${distro} ${release}"
+
+# Copied from xe-linux-distribution
+eval $(echo $release | awk -F. -- '{ subindex = index($0,"."); \
+                                     print "major=\"" $1 "\""; \
+                                     print "minor=\"" substr($0,subindex+1) "\"" }')
+
+echo "os_distro=\"${distro}\""
+echo "os_majorver=\"${major}\""
+echo "os_minorver=\"${minor}\""
+echo "os_uname=\"${uname}\""
+echo "os_name=\"${name}\""

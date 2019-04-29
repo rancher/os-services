@@ -103,6 +103,10 @@ cd /dist
 cp -r /dist/arch/lib/modules/${KERNEL_VERSION}/extra /lib/modules/${KERNEL_VERSION}/
 depmod
 
+cd /dist/zfs
+LIB_DIR=/dist/arch/usr/local/lib scripts/zfs-helpers.sh -i
+cd /dist
+
 cp /dist/Dockerfile.zfs-tools /dist/arch/Dockerfile
 cp /dist/entry.sh /dist/arch/
 
@@ -113,14 +117,23 @@ echo "#!/bin/sh" > /dist/arch/setup_wonka.sh
 echo "echo installing wonka bin links in \${1}" >> /dist/arch/setup_wonka.sh
 chmod 755 /dist/arch/setup_wonka.sh
 for i in $(ls arch/usr/local/bin); do
-   echo "system-docker cp wonka.sh \${1}:/usr/bin/$i" >> /dist/arch/setup_wonka.sh
+    echo "system-docker cp wonka.sh \${1}:/usr/bin/$i" >> /dist/arch/setup_wonka.sh
 done
 for i in $(ls arch/usr/local/sbin); do
-   echo "system-docker cp wonka.sh \${1}:usr/sbin/$i" >> /dist/arch/setup_wonka.sh
+    echo "system-docker cp wonka.sh \${1}:usr/sbin/$i" >> /dist/arch/setup_wonka.sh
 done
 for i in $(ls arch/sbin); do
-   echo "system-docker cp wonka.sh \${1}:/sbin/$i" >> /dist/arch/setup_wonka.sh
+    echo "system-docker cp wonka.sh \${1}:/sbin/$i" >> /dist/arch/setup_wonka.sh
 done
+for i in $(ls arch/usr/local/lib); do
+    echo "system-docker cp wonka.sh \${1}:usr/lib/$i" >> /dist/arch/setup_wonka.sh
+done
+
+system-docker cp arch/lib/udev/zvol_id udev:/lib/udev/zvol_id
+system-docker cp arch/lib/udev/vdev_id udev:/lib/udev/vdev_id
+system-docker cp arch/lib/udev/rules.d/60-zvol.rules udev:/etc/udev/rules.d/60-zvol.rules
+system-docker cp arch/lib/udev/rules.d/69-vdev.rules udev:/etc/udev/rules.d/69-vdev.rules
+system-docker cp arch/lib/udev/rules.d/90-zfs.rules udev:/etc/udev/rules.d/90-zfs.rules
 
 if [ "XX$HTTP_PROXY" != "XX" ]; then
     BUILD_ARGS="--build-arg HTTP_PROXY --build-arg http_proxy="$HTTP_PROXY

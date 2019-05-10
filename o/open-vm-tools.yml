@@ -1,5 +1,5 @@
 open-vm-tools:
-  image: ${REGISTRY_DOMAIN}/rancher/os-openvmtools:10.2.5-3
+  image: ${REGISTRY_DOMAIN}/rancher/os-openvmtools:10.3.10-1
   command: /usr/bin/vmtoolsd
   privileged: true
   labels:

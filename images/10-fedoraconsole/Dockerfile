@@ -19,5 +19,6 @@ RUN dnf install -y iptables openssh-server rsync sudo vim-minimal \
     && echo 'docker ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers \
     && cat /etc/ssh/sshd_config > /etc/ssh/sshd_config.tpl \
     && cat /etc/ssh/sshd_config.append.tpl >> /etc/ssh/sshd_config.tpl \
-    && rm -f /etc/ssh/sshd_config.append.tpl /etc/ssh/sshd_config
+    && rm -f /etc/ssh/sshd_config.append.tpl /etc/ssh/sshd_config \
+    && sed -i '0,/PermitRootLogin/{//d}' /etc/ssh/sshd_config.tpl
 ENTRYPOINT ["/usr/bin/ros", "entrypoint"]

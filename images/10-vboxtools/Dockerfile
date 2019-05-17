@@ -1,5 +1,5 @@
-FROM gcc:7.3.0 as build-essential
-ENV KERNEL_VERSION 4.14.85-rancher
+FROM gcc:7.4.0 as build-essential
+ENV KERNEL_VERSION 4.14.119-rancher
 
 ENV KERNEL_HEADERS https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/build-linux-${KERNEL_VERSION}-x86.tar.gz
 ENV KERNEL_BASE https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-x86.tar.gz

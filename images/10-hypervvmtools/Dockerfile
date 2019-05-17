@@ -1,4 +1,4 @@
-FROM gcc:7.3.0 as build-essential
+FROM gcc:7.4.0 as build-essential
 # FROM arm64=skip arm=skip
 #RUN apt-get update && \
 #    apt-get install -y --no-install-recommends kmod && \
@@ -6,7 +6,7 @@ FROM gcc:7.3.0 as build-essential
 #    rm -rf /var/lib/apt/* \
 
 WORKDIR /dist
-ENV KERNEL_VERSION 4.14.85-rancher
+ENV KERNEL_VERSION 4.14.119-rancher
 ENV KERNEL_SRC https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-x86-src.tgz
 
 RUN wget -q $KERNEL_SRC && \

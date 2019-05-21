@@ -1,6 +1,5 @@
 services:
 - amazon-ecs-agent
-- amazon-ena-driver
 - crontab
 - open-iscsi
 - zfs

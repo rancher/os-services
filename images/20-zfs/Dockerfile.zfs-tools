@@ -1,5 +1,5 @@
-FROM ubuntu:17.10
-# FROM arm64=aarch64/ubuntu:17.10 arm=armhf/ubuntu:17.10
+FROM ubuntu:bionic
+# FROM arm64=arm64v8/ubuntu:bionic
 
 RUN apt-get update \
     && apt-get install -yq python \

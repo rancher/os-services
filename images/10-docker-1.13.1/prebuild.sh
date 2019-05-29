@@ -17,6 +17,6 @@ DEST="./images/10-docker-${VERSION}${SUFFIX}"
 mkdir -p $DEST
 curl -sL ${URL} | tar xzf - -C $DEST
 mv $DEST/docker $DEST/engine
-rm -rf $DEST/completion
+mv $DEST/engine/completion $DEST || true
 
 curl -sL -o $DEST/engine/docker-runc https://github.com/rancher/runc-cve/releases/download/CVE-2019-5736-build2/runc-v${VERSION}-${ARCH}

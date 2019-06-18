@@ -76,7 +76,7 @@ for i in $(ls arch/sbin); do
    echo "system-docker cp wonka.sh \${1}:/sbin/$i" >> /dist/arch/setup_wonka.sh
 done
 chmod 755 /dist/arch/setup_wonka.sh
-system-docker build --network=host -t iscsi-tools arch/
+system-docker build --build-arg http_proxy=$HTTP_PROXY --build-arg https_proxy=$HTTPS_PROXY --network=host -t iscsi-tools arch/
 
 modprobe iscsi_tcp
 

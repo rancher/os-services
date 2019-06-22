@@ -1,5 +1,5 @@
 hyperv-vm-tools:
-  image: ${REGISTRY_DOMAIN}/rancher/os-hypervvmtools:v4.14.122-rancher-1
+  image: ${REGISTRY_DOMAIN}/rancher/os-hypervvmtools:v4.14.128-rancher-1
   command: ["hv_kvp_daemon", "-n"]
   privileged: true
   labels:

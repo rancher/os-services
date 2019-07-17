@@ -1,0 +1,21 @@
+docker:
+  image: ${REGISTRY_DOMAIN}/rancher/os-docker:18.09.8${SUFFIX}
+  command: ros user-docker
+  environment:
+  - HTTP_PROXY
+  - HTTPS_PROXY
+  - NO_PROXY
+  labels:
+    io.rancher.os.scope: system
+    io.rancher.os.after: console
+  net: host
+  pid: host
+  ipc: host
+  uts: host
+  privileged: true
+  restart: always
+  volumes_from:
+  - all-volumes
+  volumes:
+  - /sys:/host/sys
+  - /var/lib/system-docker:/var/lib/system-docker:shared

@@ -1,5 +1,5 @@
 open-iscsi:
-  image: ${REGISTRY_DOMAIN}/rancher/os-iscsi:v2.0.873-1
+  image: ${REGISTRY_DOMAIN}/rancher/os-iscsi:v2.0.873-2
   command: ./build.sh
   privileged: "true"
   labels:

@@ -1,6 +1,6 @@
 services:
 - amazon-ecs-agent
-- crontab
+- container-cron
 - open-iscsi
 - zfs
 - kernel-extras

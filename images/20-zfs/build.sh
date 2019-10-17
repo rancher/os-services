@@ -31,11 +31,8 @@ ros service up kernel-headers-system-docker
 
 
 # get the zfs source as per https://github.com/zfsonlinux/zfs/wiki/Building-ZFS
-VERSION="0.7.13"
-curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/spl-${VERSION}.tar.gz > spl-${VERSION}.tar.gz
+VERSION="0.8.2"
 curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${VERSION}/zfs-${VERSION}.tar.gz > zfs-${VERSION}.tar.gz
-mkdir -p spl
-tar zxvf spl-${VERSION}.tar.gz --strip-components=1 -C spl
 mkdir -p zfs
 tar zxvf zfs-${VERSION}.tar.gz --strip-components=1 -C zfs
 
@@ -81,12 +78,6 @@ tar zxvf zfs-${VERSION}.tar.gz --strip-components=1 -C zfs
 
 
 #   --prefix=/dist
-cd /dist/spl
-sh ./autogen.sh
-./configure \
-          --with-linux=${DIR}
-make -s -j$(nproc)
-
 cd /dist/zfs
 sh ./autogen.sh
 ./configure \
@@ -94,8 +85,6 @@ sh ./autogen.sh
 make -s -j$(nproc)
 
 # last layer - we could use stratos :)
-cd /dist/spl
-make DESTDIR=/dist/arch install
 cd /dist/zfs
 make DESTDIR=/dist/arch install
 cd /dist

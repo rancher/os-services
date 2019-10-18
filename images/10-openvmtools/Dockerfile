@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 	iproute2 \
 	sudo \
 	fuse \
-	libtirpc1 \
+	libtirpc-common \
 	libdumbnet1 \
 	libfuse2 \
 	libffi6 \

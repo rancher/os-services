@@ -1,5 +1,5 @@
 FROM rancher/os-fedoraconsole-base
-# FROM amd64=fedora:28 arm64=arm64v8/fedora:28
+# FROM amd64=fedora:31 arm64=arm64v8/fedora:31
 
 COPY prompt.sh /etc/profile.d/
 COPY build/sshd_config.append.tpl /etc/ssh/

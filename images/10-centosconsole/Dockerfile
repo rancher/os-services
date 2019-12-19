@@ -1,5 +1,5 @@
 FROM rancher/os-centosconsole-base
-# FROM amd64=centos:7.5.1804 arm64=arm64v8/centos:7
+# FROM amd64=centos:7.7.1908 arm64=arm64v8/centos:7
 
 COPY prompt.sh /etc/profile.d/
 COPY build/sshd_config.append.tpl /etc/ssh/

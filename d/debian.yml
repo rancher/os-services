@@ -1,5 +1,5 @@
 console:
-  image: ${REGISTRY_DOMAIN}/rancher/os-debianconsole:v1.5.5-rc1${SUFFIX}
+  image: ${REGISTRY_DOMAIN}/rancher/os-debianconsole:v1.5.5${SUFFIX}
   command: ros console-init
   privileged: true
   labels:

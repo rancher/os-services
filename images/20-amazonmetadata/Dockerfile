@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.11
 # FROM arm64=skip arm=skip
 
 RUN apk -Uuv add bash jq ca-certificates groff less python py-pip && \

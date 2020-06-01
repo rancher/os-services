@@ -60,4 +60,5 @@ engines:
 - docker-19.03.5
 - docker-19.03.7
 - docker-19.03.8
+- docker-19.03.9
 - docker-19.03.11

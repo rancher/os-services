@@ -19,6 +19,7 @@ services:
 - waagent
 - virtualbox-tools
 - pingan-amc
+- xe-guest-agent
 consoles:
 - alpine
 - centos

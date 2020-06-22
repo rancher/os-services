@@ -1,0 +1,3 @@
+#!/bin/sh
+/usr/local/bin/xe-ros-version > /var/cache/xe-linux-distribution
+/usr/local/sbin/xe-daemon

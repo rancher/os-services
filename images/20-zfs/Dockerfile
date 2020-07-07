@@ -1,5 +1,5 @@
-FROM gcc:7.4.0
-# FROM arm64=arm64v8/gcc:7.4.0
+FROM gcc:10
+# FROM arm64=arm64v8/gcc:10
 
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends \

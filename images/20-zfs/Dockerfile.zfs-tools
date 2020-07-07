@@ -1,5 +1,5 @@
-FROM ubuntu:disco
-# FROM arm64=arm64v8/ubuntu:disco
+FROM ubuntu:focal
+# FROM arm64=arm64v8/ubuntu:focal
 
 RUN apt-get update \
     && apt-get install -yq python \

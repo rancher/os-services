@@ -1,5 +1,5 @@
 zfs:
-  image: ${REGISTRY_DOMAIN}/rancher/os-zfs:v0.8.3-1${SUFFIX}
+  image: ${REGISTRY_DOMAIN}/rancher/os-zfs:v0.8.4-1${SUFFIX}
   command: ./build.sh
   privileged: "true"
   labels:

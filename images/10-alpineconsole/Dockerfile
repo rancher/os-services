@@ -1,5 +1,5 @@
 FROM rancher/os-alpineconsole-base
-# FROM amd64=alpine:3.10 arm64=arm64v8/alpine:3.10
+# FROM amd64=alpine:3.12 arm64=arm64v8/alpine:3.12
 
 COPY build/sshd_config.append.tpl /etc/ssh/
 

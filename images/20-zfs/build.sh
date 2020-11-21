@@ -73,7 +73,7 @@ tar zxvf zfs-${VERSION}.tar.gz --strip-components=1 -C zfs
 
 # get headers for the kernel we're building for
 #ENV LINUX 4.9.2-rancher
-#RUN curl -sL https://github.com/rancher/os-kernel/releases/download/v${LINUX}/build-linux-${LINUX}-x86.tar.gz > build-linux-${LINUX}-x86.tar.gz
+#RUN curl -sL https://github.com/burmilla/os-kernel/releases/download/v${LINUX}/build-linux-${LINUX}-x86.tar.gz > build-linux-${LINUX}-x86.tar.gz
 #
 #RUN mkdir ${LINUX}
 #RUN cd ${LINUX}

@@ -1,5 +1,5 @@
 kernel-headers:
-  image: ${REGISTRY_DOMAIN}/rancher/os-headers:${KERNEL_VERSION}${SUFFIX}
+  image: ${REGISTRY_DOMAIN}/burmilla/os-headers:${KERNEL_VERSION}${SUFFIX}
   labels:
     io.rancher.os.detach: "false"
     io.rancher.os.after: "network"

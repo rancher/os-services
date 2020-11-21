@@ -1,5 +1,5 @@
 virtualbox-tools:
-  image: ${REGISTRY_DOMAIN}/rancher/os-vboxtools:v5.2.26-5
+  image: ${REGISTRY_DOMAIN}/burmilla/os-vboxtools:v6.1.16-4.14.206-burmilla
   command: /usr/local/bin/run
   privileged: true
   restart: always

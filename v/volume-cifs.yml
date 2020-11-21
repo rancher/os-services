@@ -1,6 +1,6 @@
 volume-cifs:
   command: cifs --verbose --basedir=/mnt/volumes/netshare ${VOLUME_CIFS_OPTIONS}
-  image: ${REGISTRY_DOMAIN}/rancher/os-volumenetshare
+  image: ${REGISTRY_DOMAIN}/burmilla/os-volumenetshare:v0.36-1
   pid: host
   ipc: host
   net: host

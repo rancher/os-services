@@ -48,8 +48,8 @@ function build() {
     if [ $(docker images -q ${tag}) ]; then
         echo "== ${tag} EXISTS locally, needs pushing"
         if [ "${name}" == "os-docker" ]; then
-            docker run --rm -it ${tag} /engine/docker version | grep Version
-            docker run --rm -it ${tag} /engine/docker version | grep Arch
+            docker run --rm -i ${tag} /engine/docker version | grep Version
+            docker run --rm -i ${tag} /engine/docker version | grep Arch
         fi
     else
         echo Building ${tag} from ${build_dir}
@@ -60,8 +60,8 @@ function build() {
         if dapper -d --build -f ${build_dir}/Dockerfile -- -t ${OS_REPO}/${name} ${build_dir}; then
             docker tag ${OS_REPO}/${name} ${tag}
             if [ "${name}" == "os-docker" ]; then
-                docker run --rm -it ${tag} /engine/docker version | grep Version
-                docker run --rm -it ${tag} /engine/docker version | grep Arch
+                docker run --rm -i ${tag} /engine/docker version | grep Version
+                docker run --rm -i ${tag} /engine/docker version | grep Arch
             fi
         elif [ "$?" != "42" ]; then
             exit 1
@@ -80,7 +80,7 @@ source $(dirname $0)/version
 cd $(dirname $0)/..
 
 mkdir -p dist
-echo > dist/images
+touch dist/images
 
 image_dirname=${IMAGE_BUILD_NAME:-"[1-9]*"}
 for i in $BASE/$image_dirname; do

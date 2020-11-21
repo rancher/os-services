@@ -1,7 +1,7 @@
-FROM debian:stretch-slim
+FROM debian:stable-slim
 # FROM arm64=skip
 
-# qga version 2.8.1
+# qemu-guest-agent version 3.1.0
 RUN apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y qemu-guest-agent \
     && apt-get clean \

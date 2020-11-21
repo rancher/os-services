@@ -6,7 +6,7 @@ RUN apt-get update && \
 
 ENV DAPPER_ENV VERSION DEV_BUILD
 ENV DAPPER_DOCKER_SOCKET true
-ENV DAPPER_SOURCE /go/src/github.com/rancher/os-images
+ENV DAPPER_SOURCE /go/src/github.com/burmilla/os-services
 ENV DAPPER_OUTPUT ./dist
 ENV DAPPER_RUN_ARGS --privileged
 ENV SHELL /bin/bash
@@ -17,13 +17,13 @@ ARG DAPPER_HOST_ARCH=amd64
 ARG HOST_ARCH=${DAPPER_HOST_ARCH}
 ARG ARCH=${HOST_ARCH}
 
-ARG OS_REPO=rancher
+ARG OS_REPO=burmilla
 ARG DOCKER_VERSION=1.10.3
 ARG DOCKER_PATCH_VERSION=v${DOCKER_VERSION}-ros1
 
 ARG DOCKER_URL_amd64=https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}
-ARG DOCKER_URL_arm=https://github.com/rancher/docker/releases/download/${DOCKER_PATCH_VERSION}/docker-${DOCKER_VERSION}_arm
-ARG DOCKER_URL_arm64=https://github.com/rancher/docker/releases/download/${DOCKER_PATCH_VERSION}/docker-${DOCKER_VERSION}_arm64
+ARG DOCKER_URL_arm=https://github.com/burmilla/docker/releases/download/${DOCKER_PATCH_VERSION}/docker-${DOCKER_VERSION}_arm
+ARG DOCKER_URL_arm64=https://github.com/burmilla/docker/releases/download/${DOCKER_PATCH_VERSION}/docker-${DOCKER_VERSION}_arm64
 
 ARG IMAGE_BUILD_NAME=[1-9]*
 

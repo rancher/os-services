@@ -1,5 +1,5 @@
 modem-manager:
-  image: ${REGISTRY_DOMAIN}/rancher/os-modemmanager:v1.6.4-1
+  image: ${REGISTRY_DOMAIN}/burmilla/os-modemmanager:v1.6.4-1
   privileged: true
   labels:
     io.rancher.os.scope: system

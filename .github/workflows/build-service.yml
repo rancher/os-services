@@ -1,0 +1,35 @@
+name: build-service
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_build_name:
+        description: 'IMAGE_BUILD_NAME'
+        default: '20-vboxtools'
+        required: true
+      version:
+        description: 'VERSION'
+        default: '0.0.1'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+
+    - name: Build with dapper
+      run: |
+        export DOCKER_VERSION=1.10.3
+        export IMAGE_BUILD_NAME=${{ github.event.inputs.image_build_name }}
+        export VERSION=${{ github.event.inputs.version }}
+        make
+        make release
+
+    - name: Log into registry
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    - name: Push images to Docker Hub
+      run: ${PWD}/dist/publish.sh

@@ -1,7 +1,7 @@
 # this is deprecated - as we're installing into the host OS, it makes more sense
 # for them to be able to bootstrap your system to be able to start the user docker
 kernel-headers-system-docker:
-  image: ${REGISTRY_DOMAIN}/rancher/os-headers:${KERNEL_VERSION}${SUFFIX}
+  image: ${REGISTRY_DOMAIN}/burmilla/os-headers:${KERNEL_VERSION}${SUFFIX}
   labels:
     io.rancher.os.detach: "false"
     io.rancher.os.after: "network"

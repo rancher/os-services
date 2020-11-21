@@ -1,5 +1,5 @@
 waagent:
-  image: ${REGISTRY_DOMAIN}/rancher/os-waagent:v2.2.34-1
+  image: ${REGISTRY_DOMAIN}/burmilla/os-waagent:v2.2.49.2-1
   command: ["-daemon", "-verbose"]
   privileged: true
   labels:

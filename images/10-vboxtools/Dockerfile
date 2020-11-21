@@ -1,10 +1,10 @@
 FROM gcc:7.4.0 as build-essential
-ENV KERNEL_VERSION 4.14.138-rancher
+ENV KERNEL_VERSION 4.14.206-burmilla
 
-ENV KERNEL_HEADERS https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/build-linux-${KERNEL_VERSION}-x86.tar.gz
-ENV KERNEL_BASE https://github.com/rancher/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-x86.tar.gz
-ENV VBOX_VERSION 5.2.26
-ENV VBOX_SHA256 b927c5d0d4c97a9da2522daad41fe96b616ed06bfb0c883f9c42aad2244f7c38
+ENV KERNEL_HEADERS https://github.com/burmilla/os-kernel/releases/download/v${KERNEL_VERSION}/build-linux-${KERNEL_VERSION}-x86.tar.gz
+ENV KERNEL_BASE https://github.com/burmilla/os-kernel/releases/download/v${KERNEL_VERSION}/linux-${KERNEL_VERSION}-x86.tar.gz
+ENV VBOX_VERSION 6.1.16
+ENV VBOX_SHA256 88db771a5efd7c048228e5c1e0b8fba56542e9d8c1b75f7af5b0c4cf334f0584
 
 RUN apt-get update; \
 	apt-get install -y --no-install-recommends p7zip-full libelf-dev; \

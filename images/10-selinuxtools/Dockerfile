@@ -17,7 +17,7 @@ RUN groupadd --gid 1100 rancher \
 COPY prompt.sh /etc/profile.d/
 
 RUN dnf install -y git make gcc findutils selinux-policy-devel setools-console setools-devel \
-    && git clone https://github.com/rancher/refpolicy.git /usr/src/refpolicy \
+    && git clone https://github.com/burmilla/refpolicy.git /usr/src/refpolicy \
     && cd /usr/src/refpolicy && git submodule init && git submodule update \
     && sed -i '/MONOLITHIC = y/c\MONOLITHIC = n' build.conf \
     && make conf && make && make install-headers

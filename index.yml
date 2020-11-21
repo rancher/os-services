@@ -16,3 +16,4 @@ services:
 - waagent
 - virtualbox-tools
 engines:
+- docker-19.03.13

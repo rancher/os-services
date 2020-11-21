@@ -1,6 +1,6 @@
-# Docs: https://github.com/rancher/rancher-catalog/blob/master/infra-templates/container-crontab/0/README.md
+# Docs: https://github.com/burmilla/rancher-catalog/blob/master/infra-templates/container-crontab/0/README.md
 container-cron:
-  image: ${REGISTRY_DOMAIN}/rancher/container-crontab:v0.5.0
+  image: ${REGISTRY_DOMAIN}/burmilla/container-crontab:v0.5.0
   privileged: true
   restart: always
   uts: host

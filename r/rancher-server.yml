@@ -1,9 +1,0 @@
-rancher-server:
-  image: ${REGISTRY_DOMAIN}/rancher/server:latest
-  privileged: false
-  labels:
-    io.rancher.os.scope: user
-    io.rancher.os.after: docker
-  restart: unless-stopped
-  ports:
-    - 8080:8080

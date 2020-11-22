@@ -1,6 +1,6 @@
 ## Build stage
 # Borrowed from https://github.com/boot2docker/boot2docker/blob/17.03.x/Dockerfile#L222-L255
-FROM debian:stretch-slim as build
+FROM debian:buster-slim as build
 
 RUN set -eux; \
         apt-get update; \
@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
         libmspack-dev \
         libssl-dev \
         libtirpc-dev \
-        libtirpc1 \
+        libtirpc3 \
         libtool \
     && rm -rf /var/lib/apt/lists/*
 
@@ -61,12 +61,12 @@ RUN curl -fL -o /tmp/${LIBDNET}.zip https://github.com/dugsong/libdnet/archive/$
 
 # Horrible hack again
 RUN ln -sT libdnet.1 "$ROOTFS/usr/local/lib/libdumbnet.so.1" \
-	&& readlink -f "$ROOTFS/usr/local/lib/libdumbnet.so.1"
+    && readlink -f "$ROOTFS/usr/local/lib/libdumbnet.so.1"
 
 # TCL 7 doesn't ship with libtirpc.so.1 Dummy it up so the VMware tools work again, taken from:
 # https://github.com/boot2docker/boot2docker/issues/1157#issuecomment-211647607
 RUN ln -sT libtirpc.so "$ROOTFS/usr/local/lib/libtirpc.so.1" \
-	&& readlink -f "$ROOTFS/usr/local/lib/libtirpc.so.1"
+    && readlink -f "$ROOTFS/usr/local/lib/libtirpc.so.1"
 
 # verify that all the above actually worked (at least producing a valid binary, so we don't repeat issue #1157)
 RUN LD_LIBRARY_PATH='/lib:/usr/local/lib:/rootfs/usr/local/lib'
@@ -78,26 +78,24 @@ FROM debian:buster-slim as final
 
 # net-tools for ifconfig, iproute for ip
 RUN apt-get update && apt-get install -y \
-	net-tools \
-	iproute2 \
-	sudo \
-	fuse \
-	libtirpc-common \
-	libdumbnet1 \
-	libfuse2 \
-	libffi6 \
+    net-tools \
+    iproute2 \
+    sudo \
+    fuse \
+    libtirpc-common \
+    libtirpc3 \
+    libdumbnet1 \
+    libfuse2 \
+    libffi6 \
+    libglib2.0-0 \
     && apt-get clean \
     && rm -rf /var/lib/apt/*
 
-COPY --from=build bin/ /usr/local/bin
-COPY --from=build lib/ /usr/local/lib
-COPY --from=build etc/ /etc
+COPY --from=build /rootfs/ /
 
 RUN mkdir -p /mnt/hgfs \
-    && rm -f /usr/bin/touch \
-    && rm -f /usr/bin/which \
-	&& ln -s /usr/local/bin/* /usr/bin/ \
-	&& ldconfig
+    && ln -s /usr/local/bin/* /usr/bin/ \
+    && ldconfig
 
 ENV LD_LIBRARY_PATH /lib:/usr/local/lib
 ENV LIBRARY_PATH /lib:/usr/local/lib

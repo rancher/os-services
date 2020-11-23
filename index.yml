@@ -15,5 +15,6 @@ services:
 - modem-manager
 - waagent
 - virtualbox-tools
+- docker-compose
 engines:
 - docker-19.03.13

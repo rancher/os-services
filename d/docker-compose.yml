@@ -1,0 +1,9 @@
+docker-compose:
+  image: ${REGISTRY_DOMAIN}/burmilla/os-dockercompose:1.27.4
+  labels:
+    io.rancher.os.scope: system
+    io.rancher.os.after: console
+  net: none
+  privileged: true
+  volumes_from:
+  - all-volumes

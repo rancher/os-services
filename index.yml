@@ -19,3 +19,4 @@ services:
 engines:
 - docker-19.03.13
 - docker-19.03.14
+- docker-20.10.0

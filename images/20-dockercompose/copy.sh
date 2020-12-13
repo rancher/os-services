@@ -1,2 +1,2 @@
 #!/bin/sh
-cp /compose/docker-compose /var/lib/rancher/engine/
+cp /compose/docker-compose /var/lib/rancher/compose/
